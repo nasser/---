@@ -1,0 +1,35 @@
+start =
+  content:literal* { return content.reverse() }
+
+list = "(" content:start ")" space? { return content }
+
+literal =
+  string / number / identifier / list
+
+identifier =
+  first:hrf rest:(hrf / [٠١٢٣٤٥٦٧٨٩] )* space? { return first + rest.join("") }
+
+string =
+  '"' str:[^""]* '"' space? { return str.join("") }
+
+number =
+  d:(rqm/".")+ space? { return parseFloat(d.join('')) }
+
+
+hrf =
+  "ا"/"ب"/"ج"/"د"/"ه"/"و"/"ز"/"ح"/"ت"/"ي"/"ك"/"ل"/"م"/"ن"/"ق"/"ش"/"ع"/"ر"/"ت"/"ط"/"ة"/"س"/"د"/"ف"/"غ"/"خ"/"ص"/"ذ"/"ن"/"م"/"ظ"/"ى"/"آ"/"إ"/"ض"/"ث"
+
+rqm = wahad/tnein/tlateh/arbaa/khamseh/sitteh/sabaa/tmaneh/tisaa/siffr
+
+wahad   = "١" { return "1" }
+tnein   = "٢" { return "2" }
+tlateh  = "٣" { return "3" }
+arbaa   = "٤" { return "4" }
+khamseh = "٥" { return "5" }
+sitteh  = "٦" { return "6" }
+sabaa   = "٧" { return "7" }
+tmaneh  = "٨" { return "8" }
+tisaa   = "٩" { return "9" }
+siffr   = "٠" { return "0" }
+
+space  = ' '+ { return "" }

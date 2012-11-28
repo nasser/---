@@ -1,0 +1,19 @@
+<html>
+<head>
+  <title>Qlb</title>
+  <meta charset="utf-8">
+  <script src="js/peg.js"></script>
+  <script src="js/jquery.js"></script>
+
+  <script type="text/javascript">
+    var Qlb;
+    $.get("/peg/qlb.peg", function(grammar) {
+      Qlb = PEG.buildParser(grammar);
+      console.log(Qlb.parse('قول "مرحبا يا عالم"'));
+    });
+  </script>
+</head>
+<body>
+
+</body>
+</html>
