@@ -1,23 +1,23 @@
 start =
-  content:literal* { return content.reverse() }
+  content:literal* { return {type:"list", value:content} }
 
 list = "(" content:start ")" space? { return content }
 
 literal =
-  string / number / identifier / list
+  string / number / symbol / list
 
-identifier =
-  first:hrf rest:(hrf / [٠١٢٣٤٥٦٧٨٩] )* space? { return first + rest.join("") }
+symbol =
+  first:hrf rest:(hrf / [٠١٢٣٤٥٦٧٨٩] )* space? { return {type:"symbol", value:first + rest.join("")} }
 
 string =
-  '"' str:[^""]* '"' space? { return str.join("") }
+  '"' str:[^""]* '"' space? { return {type:"string", value:str.join("")} }
 
 number =
-  d:(rqm/".")+ space? { return parseFloat(d.join('')) }
+  d:(rqm/".")+ space? { return {type:"number", value:parseFloat(d.join(''))} }
 
 
 hrf =
-  "ا"/"ب"/"ج"/"د"/"ه"/"و"/"ز"/"ح"/"ت"/"ي"/"ك"/"ل"/"م"/"ن"/"ق"/"ش"/"ع"/"ر"/"ت"/"ط"/"ة"/"س"/"د"/"ف"/"غ"/"خ"/"ص"/"ذ"/"ن"/"م"/"ظ"/"ى"/"آ"/"إ"/"ض"/"ث"
+  "أ"/"ا"/"ب"/"ج"/"د"/"ه"/"و"/"ز"/"ح"/"ت"/"ي"/"ك"/"ل"/"م"/"ن"/"ق"/"ش"/"ع"/"ر"/"ت"/"ط"/"ة"/"س"/"د"/"ف"/"غ"/"خ"/"ص"/"ذ"/"ن"/"م"/"ظ"/"ى"/"آ"/"إ"/"ض"/"ث"
 
 rqm = wahad/tnein/tlateh/arbaa/khamseh/sitteh/sabaa/tmaneh/tisaa/siffr
 
@@ -32,4 +32,4 @@ tmaneh  = "٨" { return "8" }
 tisaa   = "٩" { return "9" }
 siffr   = "٠" { return "0" }
 
-space  = ' '+ { return "" }
+space  = [ \n\t]+ { return "" }
