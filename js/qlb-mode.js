@@ -3,12 +3,6 @@
 	var letters = ["ـ", "أ", "ا", "ب", "ج", "د", "ه", "و", "ز", "ح", "ت", "ي", "ك", "ل", "م", "ن", "ق", "ش", "ع", "ر", "ت", "ط", "ة", "س", "د", "ف", "غ", "خ", "ص", "ذ", "ن", "م", "ظ", "ى", "آ", "إ", "ض", "ث"]
 	var lettersRegexp = new RegExp("^(" + letters.join("|") + ")");
 	
-	var constants = ['نعم', 'لا', 'فارغ'];
-	var constantRegexp = new RegExp("^("+constants.join("|")+")", 'i');
-	
-	var builtins = ['إذا', 'ثم', 'بينما', 'حد', 'إفعل', 'رد', 'كرر', 'حتى'];
-	var builtinRegexp = new RegExp("^("+builtins.join("|")+")", 'i');
-
 	var quoteCharacter = '"'
 	
 	return {
@@ -31,12 +25,12 @@
 				if (stream.match(')')) { return 'paren'; }
 
 				if (stream.match(/^(١|٢|٣|٤|٥|٦|٧|٨|٩|٠)/)) { return 'number'; }
-				if (stream.match(constantRegexp)) { return 'constant'; }
 			}
 
 			stream.next();
 			return null;
 		},
+
 		startState: function() {
 			return {
 				instring: false,
