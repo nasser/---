@@ -16,6 +16,16 @@ Name
 ----
 قلب is pronounced 'alb and means "heart" in Arabic. It is a recursive acronym standing for قلب: لغة برمجة, pronounced 'alb: lughat barmajeh, meaning "'alb: a programming language."
 
+Acknowledgments
+---------------
+The implementation is largely based on [Lispy, Peter Norvig's 90 line Lisp interpreter](http://norvig.com/lispy.html).
+
+The REPL and Editor are built on [CodeMirror](http://codemirror.net/), &copy; 2012 by Marijn Haverbeke <marijnh@gmail.com>
+
+Ajax queries are handled using a modified version of [jx.js](http://www.openjs.com/scripts/jx/)
+
+The parser uses [Peg.js](http://pegjs.majda.cz/), &copy; 2010-2012 David Majda
+
 Legal
 -----
 Copyright &copy; Ramsey Nasser 2012, provided under the [MIT License](http://opensource.org/licenses/MIT).
