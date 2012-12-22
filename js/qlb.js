@@ -14,88 +14,91 @@ Qlb.init = function(onloaded) {
 
     // Create symbol table
     Qlb.symbols = {
-  "قول": 
-  function(str) {
-    Qlb.console.log(str);
-  },
+      "قول": 
+      function(str) {
+        Qlb.console.log(str);
+      },
 
-  "ضمن":
-   function(url) {
-      jx.load("/lib/" + url + ".قلب", function(code) {
-       Qlb.run(code);
-      }, function(error) {
-        Qlb.console.warn("خطأ: نص '" + url + "' غير موجود");
-      }, false);
-   },
-   
-  "أكبر":
-  function() {
-    var args = Array.prototype.slice.call(arguments);
-    return args.reduce(function(prv, cur, idx, ary) {
-      if(idx > 0) return prv && ary[idx - 1] > ary[idx];
-      else return true;
-    });
-  },
+      "ضمن":
+       function(url) {
+          jx.load("/lib/" + url + ".قلب", function(code) {
+           return Qlb.run(code);
+          }, function(error) {
+            Qlb.console.warn("خطأ: نص '" + url + "' غير موجود");
+          }, false);
+       },
+       
+      "أكبر":
+      function() {
+        var args = Array.prototype.slice.call(arguments);
+        return args.reduce(function(prv, cur, idx, ary) {
+          if(idx > 0) return prv && ary[idx - 1] > ary[idx];
+          else return true;
+        });
+      },
 
-  "أصغر":
-  function() {
-    var args = Array.prototype.slice.call(arguments);
-    return args.reduce(function(prv, cur, idx, ary) {
-      if(idx > 0) return prv && ary[idx - 1] < ary[idx];
-      else return true;
-    });
-  },
+      "أصغر":
+      function() {
+        var args = Array.prototype.slice.call(arguments);
+        return args.reduce(function(prv, cur, idx, ary) {
+          if(idx > 0) return prv && ary[idx - 1] < ary[idx];
+          else return true;
+        });
+      },
 
-  "أجمع":
-  function() {
-    var args = Array.prototype.slice.call(arguments);
-    return args.reduce(function(prv, cur, idx, ary) {
-      return prv + cur;
-    });
-  },
+      "أجمع":
+      function() {
+        var args = Array.prototype.slice.call(arguments);
+        return args.reduce(function(prv, cur, idx, ary) {
+          return prv + cur;
+        });
+      },
 
-  "طرح":
-  function() {
-    var args = Array.prototype.slice.call(arguments);
-    return args.reduce(function(prv, cur, idx, ary) {
-      return prv - cur;
-    });
-  }
-  }
-
-      Qlb.macros = {
-        "نفذ":
-        function(ast) {
-          return Qlb.eval(ast.value);
-        },
-
-        "إذا":
-        function(cond, iftrue, iffalse) {
-          Qlb.eval(cond) ? Qlb.eval(iftrue) : Qlb.eval(iffalse);
-        },
-
-        "حدد":
-         function(sym, val) {
-           Qlb.symbols[sym.value] = val.type == "list" ? val : val.value;
-         }
+      "طرح":
+      function() {
+        var args = Array.prototype.slice.call(arguments);
+        return args.reduce(function(prv, cur, idx, ary) {
+          return prv - cur;
+        });
       }
+    }
 
     Qlb.eval = function(exp) {
       if(typeof exp == "string") {            // evaling string/symbol
         var sym = Qlb.symbols[exp];
-        return sym ? sym : exp;
+        return sym || exp;
 
       } else if(!(exp instanceof Array)) {    // evaling literal
         return exp;
 
       } else {                                // evaling list
-        var exps = exp.map(function(p) { return Qlb.eval(p) })
-        if(typeof exps[0] == "function")
-          // first element evaluates to a function
-          return exps.shift().apply(this, exps)
-        else
-          // literal array
-          return exps
+        var first = exp[0]
+        var rest = exp.slice(1)
+
+        if(first == "حرفي") {
+          return rest
+
+        } else if(first == "إذا") {
+          var test = rest[0],
+              ifex = rest[1],
+              elex = rest[2]
+
+          return Qlb.eval(Qlb.eval(test) ? ifex : elex)
+
+        } else if(first == "حدد") {
+          var sym = rest[0],
+              val = rest[1]
+          return (Qlb.symbols[sym] = Qlb.eval(val))
+
+        } else {
+          var exps = exp.map(function(p) { return Qlb.eval(p) })
+          if(typeof exps[0] == "function")
+            // first element evaluates to a function
+            return exps.shift().apply(this, exps)
+          else
+            // literal array
+            return exps
+        }
       }
     }
 
