@@ -7,7 +7,7 @@ literal =
   string / number / symbol / list
 
 symbol =
-  first:hrf rest:(hrf / [٠١٢٣٤٥٦٧٨٩] )* space? { return {type:"symbol", value:first + rest.join("")} }
+  first:hrf rest:(hrf / [٠١٢٣٤٥٦٧٨٩] / '-' / '؟' / 'ـ' )* space? { return {type:"symbol", value:(first + rest.join("")).replace(/ـ/g, "")} }
 
 string =
   '"' str:[^""]* '"' space? { return {type:"string", value:str.join("")} }

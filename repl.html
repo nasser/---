@@ -1,0 +1,150 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <title>قلب REPL</title>
+    <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/byblos.css">
+    <style type="text/css">
+    html,
+    form,
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+    }
+
+    .CodeMirror {
+      height: 36px;
+      font-size: 1.5em;
+      font-family: "Courier New", monospace;
+    }
+
+    a:visited {
+      color: blue;
+    }
+
+    div.repl-output {
+      direction: rtl;
+      font-family: "Courier New";
+      font-size: 1.5em;
+      color: gray;
+      padding-right: 4px;
+      height: 36px;
+    }
+
+    div.repl-output.warning {
+      color: red;
+    }
+
+    div.prompt {
+      font-family: "Courier New";
+      font-size: 1.5em;
+      float: right;
+      /*width: 18px;*/
+      padding-right: 4px;
+      height: 36px;
+      color: purple;
+    }
+
+    </style>
+    <script src="js/codemirror.js"></script>
+    <script src="js/qlb-mode.js"></script>
+
+    <script src="js/jx.js"></script>
+    <script src="js/peg.js"></script>
+    <script src="js/qlb.js"></script>
+    <script type="text/javascript">
+    window.onload = function() {
+      Qlb.init(function() {
+        Qlb.console = {
+          log: function(str) {
+            var div = document.createElement('div');
+            div.className = "repl-output";
+            div.innerHTML = str;
+            document.body.appendChild(div);
+
+            // implement clickable code links
+            Array.prototype.slice.call(document.querySelectorAll("a.executable")).forEach(function(e) {
+              e.onclick = function(evt) {
+                Repl.addLine('(' + this.href.match(/#(.*)/)[1] + ')')
+              }
+            })
+
+            return div;
+          },
+
+          warn: function(str) {
+            Qlb.console.log(str).className += " warning"
+          }
+        }
+
+        var Repl = {
+          history: [],
+          historyCursor: 0,
+          currentLine: null,
+
+          addLine: function(str) {
+            this.currentLine.setValue(str);
+            this.currentLine.getOption("onKeyEvent")(this.currentLine, {type:'keydown', keyCode:13, stop: function(){} }) // a hack!
+          },
+
+          run: function(str) {
+            var ret = Qlb.run(str);
+            Qlb.console.log(ret);
+          }
+        }
+
+        window.onclick = function() {
+          Repl.currentLine.focus();
+        }
+
+        function newReplLine () {
+          var codemirrorOptions = {
+            theme:"byblos",
+            lineNumbers: false,
+            lineWrapping: true,
+            direction: "rtl",
+            autofocus: true,
+            onKeyEvent: function(cm, evt) {
+              if(evt.type == 'keydown') {
+                // enter
+                if(evt.keyCode == 13) {
+                  Repl.history.unshift(cm.getValue());
+                  Qlb.run(cm.getValue());
+                  cm.options.readOnly = "nocursor";
+                  newReplLine();
+                  evt.stop();
+                  return true;
+
+                // up
+                } else if(evt.keyCode == 38) {
+                  cm.setValue(Repl.history[Repl.historyCursor++]);
+                  evt.stop();
+                  return true;
+                  
+                // down
+                } else if(evt.keyCode == 40) {
+                  cm.setValue(Repl.history[Repl.historyCursor--]);
+                  evt.stop();
+                  return true;
+
+                }
+
+              }
+            }
+          }
+
+          Repl.currentLine = CodeMirror(document.body, codemirrorOptions);
+        }
+
+        // load repl functionality
+        Qlb.symbols['ضمن']('قلب\\متفعل');
+        newReplLine();
+      });
+
+    }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

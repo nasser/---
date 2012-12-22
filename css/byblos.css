@@ -1,0 +1,9 @@
+.cm-s-byblos { font-size: 1.5em; font-family: "Courier New", monospace; }
+.cm-s-byblos span.cm-number {color: #762;}
+.cm-s-byblos span.cm-comment {color: #262; font-style: italic; line-height: 1em;}
+.cm-s-byblos span.cm-variable {color: black;}
+.cm-s-byblos span.cm-head {color: darkgoldenrod;}
+.cm-s-byblos span.cm-constant {color: red;}
+.cm-s-byblos span.cm-error {background-color: #fdd;}
+.cm-s-byblos span.cm-string {color: green;}
+.cm-s-byblos span.cm-paren {color: gray;}

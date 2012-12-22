@@ -3,118 +3,13 @@
   <title>Qlb</title>
   <meta charset="utf-8">
   <script src="js/peg.js"></script>
-  <script src="js/jquery.js"></script>
+  <script src="js/jx.js"></script>
   
   <script type="text/qlb" charset="utf-8">
-  (إذا (أكبر ٩ ٢) (قول "نعم")(قول "لا"))
+  (إذا (أكبر ٩ ١٢) (قول "نعم")(قول "لا"))
   </script>
 
-  <script type="text/javascript">
-    var Qlb = {};
-    $.get("/peg/qlb.peg", function(grammar) {
-      Qlb.parser = PEG.buildParser(grammar);
-      Qlb.symbols = {
-"قول": 
-    function(str) {
-      console.log(str);
-    },
-    
-"حدد":
-     function(sym, val) {
-       Qlb.symbols[sym] = val;
-     },
-     
-"أكبر":
-    function() {
-      var args = Array.prototype.slice.call(arguments);
-      return args.reduce(function(prv, cur, idx, ary) {
-        if(idx > 0) return prv && ary[idx - 1] > ary[idx];
-        else return true;
-      });
-      return a > b;
-    },
-    
-"أصغر":
-    function() {
-      var args = Array.prototype.slice.call(arguments);
-      return args.reduce(function(prv, cur, idx, ary) {
-        if(idx > 0) return prv && ary[idx - 1] < ary[idx];
-        else return true;
-      });
-    },
-    
-"أجمع":
-    function() {
-      var args = Array.prototype.slice.call(arguments);
-      return args.reduce(function(prv, cur, idx, ary) {
-        return prv + cur;
-      });
-    },
-    
-"طرح":
-    function() {
-      var args = Array.prototype.slice.call(arguments);
-      return args.reduce(function(prv, cur, idx, ary) {
-        return prv - cur;
-      });
-    }
-  }
-
-        Qlb.special_eval_functions = {
-"إذا":
-          function(cond, iftrue, iffalse) {
-            Qlb.eval(cond) ? Qlb.eval(iftrue) : Qlb.eval(iffalse);
-          }
-        }
-    
-      Qlb.eval = function(o) {
-        if(o.type == "list") {
-          var head = o.value[0];
-          var tail = o.value.slice(1);
-
-          var sefn = Qlb.special_eval_functions[head.value];
-          if(sefn) {
-            // head is a special eval function, takes unevaluated arguments
-            /*
-            var tail_values = [];
-            for (var i = 0; i < tail.length; i++) tail_values[i] = tail[i].value;
-            return sefn.apply(this, tail_values);
-            */
-            return sefn.apply(this, tail);
-
-          } else {
-            // head could be a normal function, evaluate all arguments
-            var fn = Qlb.eval(head);
-            for (var i = 0; i < tail.length; i++) tail[i] = Qlb.eval(tail[i]);
-            if(fn) return fn.apply(this, tail);
-
-          }
-          
-        } else if(o.type == "symbol") {
-          var resolved_symbol = Qlb.symbols[o.value];
-          
-          if(!resolved_symbol)
-            console.log("Symbol `" + o.value + "' not found");
-
-          return resolved_symbol;
-
-        } else {
-          return o.value;
-
-        }
-      }
-
-      Qlb.run = function(code) {
-        console.log("> " + code);
-        var ast = Qlb.parser.parse(code);
-        ast.value = ast.value.reverse(); // why?
-        return Qlb.eval(ast);
-      }
-
-      // Qlb.run('قول "مرحبا يا عالم"');
-      Qlb.run($("script[type$=qlb]").html().replace(/^\s+/, '').replace(/\s+$/, ''));
-    });
-  </script>
+  <script src="js/qlb.js"></script>
 </head>
 <body>
 
