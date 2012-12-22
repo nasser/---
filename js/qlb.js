@@ -3,6 +3,63 @@
 // }
 
 var Qlb = {};
+
+Qlb.Environment = function(table, outer) {
+  this.table = table
+  this.outer = outer
+  this.find = function (sym) { return this.table[sym] || (this.outer ? this.outer.find(sym) : undefined) }
+}
+
+Qlb.globalEnvironment = new Qlb.Environment({
+  "قول":
+  function(str) {
+    Qlb.console.log(str);
+  },
+
+  "ضمن":
+   function(url) {
+      jx.load("/lib/" + url + ".قلب", function(code) {
+       return Qlb.execute(code);
+      }, function(error) {
+        Qlb.console.warn("خطأ: نص '" + url + "' غير موجود");
+      }, false);
+   },
+   
+  "أكبر":
+  function() {
+    var args = Array.prototype.slice.call(arguments);
+    return args.reduce(function(prv, cur, idx, ary) {
+      if(idx > 0) return prv && ary[idx - 1] > ary[idx];
+      else return true;
+    });
+  },
+
+  "أصغر":
+  function() {
+    var args = Array.prototype.slice.call(arguments);
+    return args.reduce(function(prv, cur, idx, ary) {
+      if(idx > 0) return prv && ary[idx - 1] < ary[idx];
+      else return true;
+    });
+  },
+
+  "أجمع":
+  function() {
+    var args = Array.prototype.slice.call(arguments);
+    return args.reduce(function(prv, cur, idx, ary) {
+      return prv + cur;
+    });
+  },
+
+  "طرح":
+  function() {
+    var args = Array.prototype.slice.call(arguments);
+    return args.reduce(function(prv, cur, idx, ary) {
+      return prv - cur;
+    });
+  }
+});
+
 Qlb.init = function(onloaded) {
   // Load grammar from separate file, because dealing with JavaScripts lack of multiline strings AND Arabic input is just too much. Just too much.
   jx.load("/peg/qlb.peg", function(grammar) {
@@ -12,60 +69,9 @@ Qlb.init = function(onloaded) {
     // Default console is window consle
     if(Qlb.console === 'undefined') Qlb.console = window.console;
 
-    // Create symbol table
-    Qlb.symbols = {
-      "قول": 
-      function(str) {
-        Qlb.console.log(str);
-      },
-
-      "ضمن":
-       function(url) {
-          jx.load("/lib/" + url + ".قلب", function(code) {
-           return Qlb.run(code);
-          }, function(error) {
-            Qlb.console.warn("خطأ: نص '" + url + "' غير موجود");
-          }, false);
-       },
-       
-      "أكبر":
-      function() {
-        var args = Array.prototype.slice.call(arguments);
-        return args.reduce(function(prv, cur, idx, ary) {
-          if(idx > 0) return prv && ary[idx - 1] > ary[idx];
-          else return true;
-        });
-      },
-
-      "أصغر":
-      function() {
-        var args = Array.prototype.slice.call(arguments);
-        return args.reduce(function(prv, cur, idx, ary) {
-          if(idx > 0) return prv && ary[idx - 1] < ary[idx];
-          else return true;
-        });
-      },
-
-      "أجمع":
-      function() {
-        var args = Array.prototype.slice.call(arguments);
-        return args.reduce(function(prv, cur, idx, ary) {
-          return prv + cur;
-        });
-      },
-
-      "طرح":
-      function() {
-        var args = Array.prototype.slice.call(arguments);
-        return args.reduce(function(prv, cur, idx, ary) {
-          return prv - cur;
-        });
-      }
-    }
-
-    Qlb.eval = function(exp) {
-      if(typeof exp == "string") {            // evaling string/symbol
-        var sym = Qlb.symbols[exp];
+    Qlb.eval = function(exp, env) {
+      if(typeof exp == "string") {            // evaling string/symbol TODO make this better
+        var sym = env.find(exp);
         return sym || exp;
 
       } else if(!(exp instanceof Array)) {    // evaling literal
@@ -83,15 +89,27 @@ Qlb.init = function(onloaded) {
               ifex = rest[1],
               elex = rest[2]
 
-          return Qlb.eval(Qlb.eval(test) ? ifex : elex)
+          return Qlb.eval(Qlb.eval(test, env) ? ifex : elex, env)
 
         } else if(first == "حدد") {
           var sym = rest[0],
               val = rest[1]
-          return (Qlb.symbols[sym] = Qlb.eval(val))
+          return (env.table[sym] = Qlb.eval(val, env))
+
+        } else if(first == "لامدا") {
+          var params = rest[0],
+              body = rest.slice(1)
+
+          return function() {
+            var table = {}
+            for (var i = 0; i < params.length; i++)
+              table[params[i]] = arguments[i]
+
+            return Qlb.eval(body, new Qlb.Environment(table, env))
+          }
 
         } else {
-          var exps = exp.map(function(p) { return Qlb.eval(p) })
+          var exps = exp.map(function(p) { return Qlb.eval(p, env) })
           if(typeof exps[0] == "function")
             // first element evaluates to a function
             return exps.shift().apply(this, exps)
@@ -106,7 +124,7 @@ Qlb.init = function(onloaded) {
       try {
         var ast = Qlb.parser.parse(code);
         // ast.value = ast.value.reverse(); // why?
-        return Qlb.eval(ast);
+        return Qlb.eval(ast, Qlb.globalEnvironment);
       } catch(e) {
         Qlb.handleUncaughtException(e);
       }
