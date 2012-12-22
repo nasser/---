@@ -88,7 +88,6 @@
             this.currentLine.getOption("onKeyEvent")(this.currentLine, {type:'keydown', keyCode:13, stop: function(){} }) // a hack!
           },
 
-          run: function(str) {
           execute: function(str) {
             var ret = Qlb.execute(str);
             Qlb.console.log(ret);
