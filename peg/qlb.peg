@@ -1,5 +1,5 @@
 start =
-  content:literal* { return content }
+  space? content:literal* space? { return content }
 
 literal =
   string / number / symbol / list
