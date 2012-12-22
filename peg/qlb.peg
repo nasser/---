@@ -1,19 +1,19 @@
 start =
-  content:literal* { return {type:"list", value:content} }
-
-list = "(" content:start ")" space? { return content }
+  content:literal* { return content }
 
 literal =
   string / number / symbol / list
 
+list = "(" content:start ")" space? { return content }
+
 symbol =
-  first:hrf rest:(hrf / [٠١٢٣٤٥٦٧٨٩] / '-' / '؟' / 'ـ' )* space? { return {type:"symbol", value:(first + rest.join("")).replace(/ـ/g, "")} }
+  first:hrf rest:(hrf / [٠١٢٣٤٥٦٧٨٩] / '-' / '؟' / 'ـ' )* space? { return (first + rest.join("")).replace(/ـ/g, "") }
 
 string =
-  '"' str:[^""]* '"' space? { return {type:"string", value:str.join("")} }
+  '"' str:[^""]* '"' space? { return str.join("") }
 
 number =
-  d:(rqm/".")+ space? { return {type:"number", value:parseFloat(d.join(''))} }
+  d:(rqm/".")+ space? { return parseFloat(d.join('')) }
 
 
 hrf =

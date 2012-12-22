@@ -80,37 +80,22 @@ Qlb.init = function(onloaded) {
          }
       }
 
-    Qlb.eval = function(o) {
-      if(o.type == "list") {
-        var head = o.value[0];
-        var tail = o.value.slice(1);
+    Qlb.eval = function(exp) {
+      if(typeof exp == "string") {            // evaling string/symbol
+        var sym = Qlb.symbols[exp];
+        return sym ? sym : exp;
 
-        var sefn = Qlb.macros[head.value];
-        if(sefn) {
-          // head is a macro, takes unevaluated arguments
-          return sefn.apply(this, tail);
+      } else if(!(exp instanceof Array)) {    // evaling literal
+        return exp;
 
-        } else {
-          // head could be a normal function, evaluate all arguments
-          head = Qlb.eval(head);
-          for (var i = 0; i < tail.length; i++) tail[i] = Qlb.eval(tail[i]);
-          if(head) {
-            return head.apply(this, tail);
-          }
-
-        }
-        
-      } else if(o.type == "symbol") {
-        var resolved_symbol = Qlb.symbols[o.value];
-        
-        if(!resolved_symbol)
-          Qlb.console.warn("خطأ: رمز '" + o.value + "' غير محدد");
-
-        return resolved_symbol;
-
-      } else {
-        return o.value;
-
+      } else {                                // evaling list
+        var exps = exp.map(function(p) { return Qlb.eval(p) })
+        if(typeof exps[0] == "function")
+          // first element evaluates to a function
+          return exps.shift().apply(this, exps)
+        else
+          // literal array
+          return exps
       }
     }
 
