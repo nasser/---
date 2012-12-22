@@ -89,7 +89,8 @@
           },
 
           run: function(str) {
-            var ret = Qlb.run(str);
+          execute: function(str) {
+            var ret = Qlb.execute(str);
             Qlb.console.log(ret);
           }
         }
@@ -110,7 +111,7 @@
                 // enter
                 if(evt.keyCode == 13) {
                   Repl.history.unshift(cm.getValue());
-                  Qlb.run(cm.getValue());
+                  Qlb.execute(cm.getValue());
                   cm.options.readOnly = "nocursor";
                   newReplLine();
                   evt.stop();
@@ -138,7 +139,7 @@
         }
 
         // load repl functionality
-        Qlb.symbols['ضمن']('قلب\\متفعل');
+        Qlb.execute('(ضمن "متفعل\\متفعل")');
         newReplLine();
       });
 

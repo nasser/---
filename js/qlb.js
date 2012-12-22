@@ -120,7 +120,7 @@ Qlb.init = function(onloaded) {
       }
     }
 
-    Qlb.run = function(code) {
+    Qlb.execute = function(code) {
       try {
         var ast = Qlb.parser.parse(code);
         // ast.value = ast.value.reverse(); // why?
