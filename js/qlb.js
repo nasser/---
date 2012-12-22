@@ -113,9 +113,11 @@ Qlb.init = function(onloaded) {
           if(typeof exps[0] == "function")
             // first element evaluates to a function
             return exps.shift().apply(this, exps)
+
           else
             // literal array
             return exps
+
         }
       }
     }
@@ -125,18 +127,23 @@ Qlb.init = function(onloaded) {
         var ast = Qlb.parser.parse(code);
         // ast.value = ast.value.reverse(); // why?
         return Qlb.eval(ast, Qlb.globalEnvironment);
+
       } catch(e) {
         Qlb.handleUncaughtException(e);
+
       }
     }
 
     Qlb.handleUncaughtException = function(e) {
       switch(e.name) {
         case "SyntaxError":
+          throw e;
           Qlb.console.warn("خطأ: حرف '" + e.found + "' غير متوقع");
           break;
+
         default:
           throw e;
+
       }
     }
 
