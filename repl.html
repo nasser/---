@@ -64,9 +64,18 @@
             document.body.appendChild(div);
 
             // implement clickable code links
-            Array.prototype.slice.call(document.querySelectorAll("a.executable")).forEach(function(e) {
+            Array.prototype.slice.call(document.querySelectorAll("a.execute")).forEach(function(e) {
               e.onclick = function(evt) {
                 Repl.addLine('(' + this.href.match(/#(.*)/)[1] + ')')
+              }
+            })
+
+            Array.prototype.slice.call(document.querySelectorAll("a.load")).forEach(function(e) {
+              e.onclick = function(evt) {
+                url = this.href.match(/#(.*)/)[1]
+                jx.load("/lib/" + url + ".قلب", function(code) {
+                 Repl.addLine(code);
+                }, null, false);
               }
             })
 
