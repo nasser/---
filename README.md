@@ -4,7 +4,7 @@ The قلب Programming Language
 
 Syntax
 ------
-قلب has a minimal Scheme-like parenethsised syntax. Note that GitHub's layout engine will mangle all code samples in this Readme.
+قلب has a minimal Scheme-like parenthesized syntax. Note that GitHub's layout engine will mangle all code samples in this Readme.
 
 Hello world looks like this
 
