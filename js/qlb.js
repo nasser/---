@@ -61,7 +61,8 @@ Qlb.globalEnvironment = new Qlb.Environment({
 });
 
 Qlb.init = function(onloaded) {
-  // Load grammar from separate file, because dealing with JavaScripts lack of multiline strings AND Arabic input is just too much. Just too much.
+  // Load grammar from separate file, because dealing with JavaScripts lack of
+  // multiline strings AND Arabic input is just too much. Just too much.
   jx.load("/peg/qlb.peg", function(grammar) {
     // Load grammar
     Qlb.parser = PEG.buildParser(grammar);
