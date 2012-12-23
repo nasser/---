@@ -62,9 +62,11 @@
           historyCursor: 0,
           currentLine: null,
 
-          addLine: function(str) {
+          addLine: function(str, hitEnter) {
+            if(hitEnter===undefined) hitEnter = true;
             this.currentLine.setValue(str);
-            this.currentLine.getOption("onKeyEvent")(this.currentLine, {type:'keydown', keyCode:13, stop: function(){} }) // a hack!
+            if(hitEnter)
+              this.currentLine.getOption("onKeyEvent")(this.currentLine, {type:'keydown', keyCode:13, stop: function(){} }) // a hack!
           },
 
           execute: function(str) {
@@ -120,7 +122,7 @@
                 e.onclick = function(evt) {
                   url = this.href.match(/#(.*)/)[1]
                   jx.load("/lib/" + url + ".قلب", function(code) {
-                   Repl.addLine(code);
+                   Repl.addLine(code, false);
                   }, null, false);
                 }
               })
