@@ -7,55 +7,7 @@ Qlb.Environment = function(table, outer) {
   this.merge = function(other) { for(var name in other) this.table[name] = other[name] }
 }
 
-Qlb.globalEnvironment = new Qlb.Environment({
-  "قول":
-  function(str) {
-    Qlb.console.log(str);
-  },
-
-  "ضمن":
-   function(url) {
-      jx.load("/lib/" + url + ".قلب", function(code) {
-       return Qlb.execute(code);
-      }, function(error) {
-        Qlb.console.warn("خطأ: نص '" + url + "' غير موجود");
-      }, false);
-   },
-   
-  "أكبر":
-  function() {
-    var args = Array.prototype.slice.call(arguments);
-    return args.reduce(function(prv, cur, idx, ary) {
-      if(idx > 0) return prv && ary[idx - 1] > ary[idx];
-      else return true;
-    });
-  },
-
-  "أصغر":
-  function() {
-    var args = Array.prototype.slice.call(arguments);
-    return args.reduce(function(prv, cur, idx, ary) {
-      if(idx > 0) return prv && ary[idx - 1] < ary[idx];
-      else return true;
-    });
-  },
-
-  "أجمع":
-  function() {
-    var args = Array.prototype.slice.call(arguments);
-    return args.reduce(function(prv, cur, idx, ary) {
-      return prv + cur;
-    });
-  },
-
-  "طرح":
-  function() {
-    var args = Array.prototype.slice.call(arguments);
-    return args.reduce(function(prv, cur, idx, ary) {
-      return prv - cur;
-    });
-  }
-});
+Qlb.globalEnvironment = new Qlb.Environment({});
 
 Qlb.init = function(onloaded) {
   // Load grammar from separate file, because dealing with JavaScripts lack of
