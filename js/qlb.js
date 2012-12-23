@@ -22,7 +22,8 @@ Qlb.init = function(onloaded) {
     Qlb.eval = function(exp, env) {
       if(typeof exp == "string") {            // evaling string/symbol TODO make this better
         var sym = env.find(exp);
-        return sym || exp;
+        if(sym === undefined) return exp;
+        else return sym;
 
       } else if(!(exp instanceof Array)) {    // evaling literal
         return exp;
