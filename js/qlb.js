@@ -4,6 +4,7 @@ Qlb.Environment = function(table, outer) {
   this.table = table
   this.outer = outer
   this.find = function (sym) { return this.table[sym] || (this.outer ? this.outer.find(sym) : undefined) }
+  this.merge = function(other) { for(var name in other) this.table[name] = other[name] }
 }
 
 Qlb.globalEnvironment = new Qlb.Environment({
