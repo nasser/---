@@ -177,6 +177,9 @@
           }
 
           Repl.currentLine = CodeMirror(document.body, codemirrorOptions);
+          Repl.currentLine.on('change', function(cm) {
+            cm.setSize(null, cm.lineCount() * 28);
+          })
         }
 
         // load repl functionality
