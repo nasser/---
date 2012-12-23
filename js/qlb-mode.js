@@ -24,7 +24,7 @@
 				if (stream.match('(')) { state.inhead = true; return 'paren'; }
 				if (stream.match(')')) { return 'paren'; }
 
-				if (stream.match(/^(١|٢|٣|٤|٥|٦|٧|٨|٩|٠)/)) { return 'number'; }
+				if (stream.match(/^(١|٢|٣|٤|٥|٦|٧|٨|٩|٠|،)/)) { return 'number'; }
 			}
 
 			stream.next();
