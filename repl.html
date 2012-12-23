@@ -57,37 +57,6 @@
     <script type="text/javascript">
     window.onload = function() {
       Qlb.init(function() {
-        Qlb.console = {
-          log: function(str) {
-            var div = document.createElement('div');
-            div.className = "repl-output";
-            div.innerHTML = str;
-            document.body.appendChild(div);
-
-            // implement clickable code links
-            Array.prototype.slice.call(document.querySelectorAll("a.execute")).forEach(function(e) {
-              e.onclick = function(evt) {
-                Repl.addLine('(' + this.href.match(/#(.*)/)[1] + ')')
-              }
-            })
-
-            Array.prototype.slice.call(document.querySelectorAll("a.load")).forEach(function(e) {
-              e.onclick = function(evt) {
-                url = this.href.match(/#(.*)/)[1]
-                jx.load("/lib/" + url + ".قلب", function(code) {
-                 Repl.addLine(code);
-                }, null, false);
-              }
-            })
-
-            return div;
-          },
-
-          warn: function(str) {
-            Qlb.console.log(str).className += " warning"
-          }
-        }
-
         var Repl = {
           history: [],
           historyCursor: 0,
@@ -101,8 +70,71 @@
           execute: function(str) {
             var ret = Qlb.execute(str);
             Qlb.console.log(ret);
+          },
+
+          arabize: function(str) {
+            if(typeof str == 'number') {
+              return str.toString().
+                replace(/1/g, "١").
+                replace(/2/g, "٢").
+                replace(/3/g, "٣").
+                replace(/4/g, "٤").
+                replace(/5/g, "٥").
+                replace(/6/g, "٦").
+                replace(/7/g, "٧").
+                replace(/8/g, "٨").
+                replace(/9/g, "٩").
+                replace(/0/g, "٠").
+                replace(/\./g, "،")
+
+            } else if(str === true) {
+              return "صح"
+
+            } else if(str === false) {
+              return "خطأ"
+
+            } else if(str instanceof Array) {
+              return str.map(function(e) { return Repl.arabize(e) }).toString().replace(/,/g, "،");
+
+            } else {
+              return str
+            }
+
+          },
+
+          console: {
+            log: function(str) {
+              var div = document.createElement('div');
+              div.className = "repl-output";
+              div.innerHTML = Repl.arabize(str);
+              document.body.appendChild(div);
+
+              // implement clickable code links
+              Array.prototype.slice.call(document.querySelectorAll("a.execute")).forEach(function(e) {
+                e.onclick = function(evt) {
+                  Repl.addLine('(' + this.href.match(/#(.*)/)[1] + ')')
+                }
+              })
+
+              Array.prototype.slice.call(document.querySelectorAll("a.load")).forEach(function(e) {
+                e.onclick = function(evt) {
+                  url = this.href.match(/#(.*)/)[1]
+                  jx.load("/lib/" + url + ".قلب", function(code) {
+                   Repl.addLine(code);
+                  }, null, false);
+                }
+              })
+
+              return div;
+            },
+
+            warn: function(str) {
+              Qlb.console.log(str).className += " warning"
+            }
           }
         }
+
+        Qlb.console = Repl.console
 
         window.onclick = function() {
           Repl.currentLine.focus();
