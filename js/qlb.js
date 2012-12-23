@@ -1,7 +1,3 @@
-// Number.prototype.toString = function() {
-//   return "?";
-// }
-
 var Qlb = {};
 
 Qlb.Environment = function(table, outer) {
