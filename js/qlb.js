@@ -94,7 +94,6 @@ Qlb.init = function(onloaded) {
     Qlb.handleUncaughtException = function(e) {
       switch(e.name) {
         case "SyntaxError":
-          throw e;
           Qlb.console.warn("خطأ: حرف '" + e.found + "' غير متوقع");
           break;
 
