@@ -34,6 +34,10 @@ Qlb.init = function(onloaded) {
         if(first == "حرفي") {
           return rest
 
+        } else if(first == "إفعل") {
+          rest = rest.map(function(e) { return Qlb.eval(e, env) });
+          return rest[rest.length - 1];
+
         } else if(first == "إذا") {
           var test = rest[0],
               ifex = rest[1],
@@ -65,8 +69,8 @@ Qlb.init = function(onloaded) {
             return exps.shift().apply(this, exps)
 
           else
-            // literal array
-            return exps
+            // return last element
+            return exps[exps.length - 1];
 
         }
       }
@@ -75,8 +79,11 @@ Qlb.init = function(onloaded) {
     Qlb.execute = function(code) {
       try {
         var ast = Qlb.parser.parse(code);
-        // ast.value = ast.value.reverse(); // why?
-        return Qlb.eval(ast, Qlb.globalEnvironment);
+        var val;
+        for (var i = 0; i < ast.length; i++) {
+          val = Qlb.eval(ast[i], Qlb.globalEnvironment);
+        };
+        return val;
 
       } catch(e) {
         Qlb.handleUncaughtException(e);
