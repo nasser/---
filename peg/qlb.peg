@@ -13,7 +13,7 @@ string =
   '"' str:[^""]* '"' space? { return str.join("") }
 
 number =
-  d:(rqm/".")+ space? { return parseFloat(d.join('')) }
+  d:(rqm / "،")+ space? { return parseFloat(d.join('').replace(/،/g, ".")) }
 
 
 hrf =
