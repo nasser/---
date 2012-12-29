@@ -114,13 +114,13 @@
               // implement clickable code links
               Array.prototype.slice.call(document.querySelectorAll("a.execute")).forEach(function(e) {
                 e.onclick = function(evt) {
-                  Repl.addLine('(' + this.href.match(/#(.*)/)[1] + ')')
+                  Repl.addLine('(' + decodeURI(this.href).match(/#(.*)/)[1] + ')')
                 }
               })
 
               Array.prototype.slice.call(document.querySelectorAll("a.load")).forEach(function(e) {
                 e.onclick = function(evt) {
-                  url = this.href.match(/#(.*)/)[1]
+                  url = decodeURI(this.href).match(/#(.*)/)[1]
                   jx.load("/lib/" + url + ".قلب", function(code) {
                    Repl.addLine(code, false);
                   }, null, false);
