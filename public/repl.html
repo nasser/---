@@ -144,8 +144,8 @@
 
               Array.prototype.slice.call(document.querySelectorAll("a.load")).forEach(function(e) {
                 e.onclick = function(evt) {
-                  url = decodeURI(this.href).match(/#(.*)/)[1]
-                  jx.load("/lib/" + url + ".قلب", function(code) {
+                  url = this.href.match(/#(.*)/)[1]
+                  jx.load("/lib/" + url + ".qlb", function(code) {
                    Repl.addLine(code, false);
                   }, null, false);
                 }
@@ -210,7 +210,7 @@
         }
 
         // load repl functionality
-        Qlb.execute('(ضمن "متفعل\\متفعل")');
+        Qlb.execute('(ضمن "mtfaail/mtfaail")');
         newReplLine();
       });
 

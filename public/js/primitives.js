@@ -49,7 +49,7 @@ Qlb.globalEnvironment.merge({
 
   "ضمن":    // require
   function(url) {
-      jx.load("/lib/" + url.replace("\\", "/") + ".قلب", function(code) {
+      jx.load("/lib/" + url.replace("\\", "/") + ".qlb", function(code) {
       return Qlb.execute(code);
     }, function(error) {
       Qlb.console.warn("خطأ: نص '" + url + "' غير موجود");
