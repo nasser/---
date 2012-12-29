@@ -62,6 +62,30 @@
           historyCursor: 0,
           currentLine: null,
 
+          previousLine: function() {
+            if(historyCursor < Repl.history.length-1) historyCursor++;
+            return Repl.history[historyCursor];
+          },
+
+          nextLine: function() {
+            if(historyCursor > -1) historyCursor--;
+            return historyCursor > -1 ? Repl.history[historyCursor] : "";
+          },
+
+          incrementCursor: function() {
+            if(historyCursor < Repl.history.length-1) historyCursor++;
+            return historyCursor;
+          },
+
+          decrementCursor: function() {
+            if(historyCursor > 0) historyCursor--;
+            return historyCursor;
+          },
+
+          resetCursor: function() {
+            historyCursor = -1;
+          },
+
           addLine: function(str, hitEnter) {
             if(hitEnter===undefined) hitEnter = true;
             this.currentLine.setValue(str);
@@ -154,6 +178,7 @@
                 // enter
                 if(evt.keyCode == 13) {
                   Repl.history.unshift(cm.getValue());
+                  Repl.resetCursor();
                   Qlb.execute(cm.getValue());
                   cm.options.readOnly = "nocursor";
                   newReplLine();
@@ -162,13 +187,13 @@
 
                 // up
                 } else if(evt.keyCode == 38) {
-                  cm.setValue(Repl.history[Repl.historyCursor++]);
+                  cm.setValue(Repl.previousLine());
                   evt.stop();
                   return true;
                   
                 // down
                 } else if(evt.keyCode == 40) {
-                  cm.setValue(Repl.history[Repl.historyCursor--]);
+                  cm.setValue(Repl.nextLine());
                   evt.stop();
                   return true;
 
