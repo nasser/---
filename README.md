@@ -19,13 +19,13 @@ Name
 
 Acknowledgments
 ---------------
-The implementation is largely based on [Lispy, Peter Norvig's 90 line Lisp interpreter](http://norvig.com/lispy.html).
+The implementation is largely based on [Lispy, Peter Norvig's 90 line Lisp interpreter](http://norvig.com/lispy.html)
 
 The REPL and Editor are built on [CodeMirror](http://codemirror.net/), &copy; 2012 by Marijn Haverbeke <marijnh@gmail.com>
 
 Ajax queries are handled using a modified version of [jx.js](http://www.openjs.com/scripts/jx/)
 
-The parser uses [Peg.js](http://pegjs.majda.cz/), &copy; 2010-2012 David Majda
+The parser os built using [Peg.js](http://pegjs.majda.cz/), &copy; 2010-2012 David Majda
 
 Legal
 -----
