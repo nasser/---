@@ -25,7 +25,11 @@ The REPL and Editor are built on [CodeMirror](http://codemirror.net/), &copy; 20
 
 Ajax queries are handled using a modified version of [jx.js](http://www.openjs.com/scripts/jx/)
 
-The parser os built using [Peg.js](http://pegjs.majda.cz/), &copy; 2010-2012 David Majda
+The parser is built using [Peg.js](http://pegjs.majda.cz/), &copy; 2010-2012 David Majda
+
+The implementation of the Fibonacci algorithm is based on [this one](http://rosettacode.org/wiki/Fibonacci_sequence#Scheme) from [Rosetta Code](http://rosettacode.org/).
+
+The implementation of Conway's Game of Life is based on [this one](http://rosettacode.org/wiki/Conway%27s_Game_of_Life#Scheme) from [Rosetta Code](http://rosettacode.org/).
 
 Legal
 -----
