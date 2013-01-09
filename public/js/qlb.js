@@ -69,6 +69,9 @@ Qlb.init = function(onloaded) {
             // first element evaluates to a function
             return exps.shift().apply(this, exps)
 
+          else if(typeof exps[0] == "string")
+            throw new ReferenceError(exps[0]);
+
           else
             // return last element
             return exps[exps.length - 1];
@@ -96,6 +99,10 @@ Qlb.init = function(onloaded) {
       switch(e.name) {
         case "SyntaxError":
           Qlb.console.warn("خطأ: حرف '" + e.found + "' غير متوقع");
+          break;
+
+        case "ReferenceError":
+          Qlb.console.warn("خطأ: رمز '" + e.message + "' غير موجود");
           break;
 
         default:
