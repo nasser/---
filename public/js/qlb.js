@@ -4,10 +4,22 @@ Qlb.Environment = function(table, outer) {
   this.table = table
   this.outer = outer
   this.find = function (sym) { return this.table[sym] === undefined ? (this.outer ? this.outer.find(sym) : undefined) : this.table[sym] }
-  this.merge = function(other) { for(var name in other) this.table[name] = other[name] }
+  this.merge = function(other) { for(var name in other) { Qlb.symbols[name] = true; this.table[name] = other[name] } }
 }
 
 Qlb.globalEnvironment = new Qlb.Environment({});
+
+Qlb.symbols = {
+  "حرفي": true,
+  "إفعل": true,
+  "إذا": true,
+  "حدد": true,
+  "لامدا": true
+}
+
+Qlb.isSymbol = function(sym) {
+  return !!Qlb.symbols[sym];
+}
 
 Qlb.init = function(onloaded) {
   // Load grammar from separate file, because dealing with JavaScripts lack of
@@ -20,7 +32,7 @@ Qlb.init = function(onloaded) {
     if(Qlb.console === 'undefined') Qlb.console = window.console;
 
     Qlb.eval = function(exp, env) {
-      if(typeof exp == "string") {            // evaling string/symbol TODO make this better
+      if(typeof exp == "string") {            // evaling string/symbol
         var sym = env.find(exp);
         if(sym === undefined) return exp;
         else return sym;
@@ -69,10 +81,10 @@ Qlb.init = function(onloaded) {
             // first element evaluates to a function
             return exps.shift().apply(this, exps)
 
-          else if(typeof exps[0] == "string")
+          else if(Qlb.isSymbol(exps[0])) {
             throw new ReferenceError(exps[0]);
 
-          else
+          } else
             // return last element
             return exps[exps.length - 1];
 

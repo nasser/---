@@ -7,7 +7,7 @@ literal =
 list = "(" content:start ")" space? { return content }
 
 symbol =
-  first:hrf rest:(hrf / [٠١٢٣٤٥٦٧٨٩] / '-' / '؟' / 'ـ' )* space? { return (first + rest.join("")).replace(/ـ/g, "") }
+  first:hrf rest:(hrf / [٠١٢٣٤٥٦٧٨٩] / '-' / '؟' / 'ـ' )* space? { var sym = (first + rest.join("")).replace(/ـ/g, ""); Qlb.symbols[sym] = true; return sym; }
 
 string =
   '"' str:[^""]* '"' space? { return str.join("") }
