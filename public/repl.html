@@ -120,7 +120,7 @@
               return "خطأ"
 
             } else if(str instanceof Array) {
-              return str.map(function(e) { return Repl.arabize(e) }).toString().replace(/,/g, "،");
+              return str.map(function(e) { return Repl.arabize(e) }).toString().replace(/,/g, " ");
 
             } else {
               return str
