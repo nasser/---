@@ -1,7 +1,7 @@
 Qlb.globalEnvironment.merge({
   // general
 
-  "رأس":    // head
+  "رأس":          // head
   function(x) {
     return x[0];
   },
@@ -11,18 +11,41 @@ Qlb.globalEnvironment.merge({
     return x.slice(1);
   },
 
-  "كينس":    // cons
+  "كونس":    // cons
   function(x, y) {
     return [x].concat(y)
   },
 
-  "كينس":    // cons
-  function(x, y) {
-    return [x].concat(y)
+  "طول":    // cons
+  function(lst) {
+    return lst.length;
+  },
+
+  "حال":    // cond
+  function() {
+    for (var i = 0; i < arguments.length; i++) {
+      var cond = Qlb.eval(arguments[i][0]),
+          val = arguments[i][1];
+    }
+  },
+
+  "عدم": // null
+  function() {
+    return [];
+  },
+
+  "عدم?": // null?
+  function(lst) {
+    return lst instanceof Array && lst.length == 0;
+  },
+
+  "لائحة؟": // list?
+  function(lst) {
+    return lst instanceof Array;
   },
 
   "و":    // and
-  function(x, y) {
+  function() {
     var args = Array.prototype.slice.call(arguments);
     return args.reduce(function(prv, cur, idx, ary) {
       if(idx > 0) return prv && !!cur;
@@ -31,12 +54,17 @@ Qlb.globalEnvironment.merge({
   },
 
   "أو":    // or
-  function(x, y) {
+  function() {
     var args = Array.prototype.slice.call(arguments);
     return args.reduce(function(prv, cur, idx, ary) {
       if(idx > 0) return prv || !!cur;
       else return !!cur;
     });
+  },
+
+  "طبق":    // map
+  function(fn, lst) {
+    return lst.map(fn);
   },
 
   // input/output
@@ -58,6 +86,11 @@ Qlb.globalEnvironment.merge({
 
   // comparison
    
+  "يساوي؟":     // equals
+  function(a, b) {
+    return a == b;
+  },
+
   "أكبر؟":     // greater
   function(a, b) {
     return a > b;
@@ -137,7 +170,7 @@ Qlb.globalEnvironment.merge({
     });
   },
 
-  "ضرب":     // divide
+  "قسم":     // divide
   function() {
     var args = Array.prototype.slice.call(arguments);
     return args.reduce(function(prv, cur, idx, ary) {
