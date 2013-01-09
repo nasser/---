@@ -31,6 +31,8 @@ The implementation of the Fibonacci algorithm is based on [this one](http://rose
 
 The implementation of Conway's Game of Life is based on [this one](http://rosettacode.org/wiki/Conway%27s_Game_of_Life#Scheme) from [Rosetta Code](http://rosettacode.org/).
 
+Arabic spelling and grammar help from the wonderful [Haitham Ennasr](https://twitter.com/e_n_n_a_s_r)
+
 Legal
 -----
 Copyright &copy; Ramsey Nasser 2012, provided under the [MIT License](http://opensource.org/licenses/MIT).
