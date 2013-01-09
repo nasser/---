@@ -34,7 +34,7 @@ Qlb.globalEnvironment.merge({
     return [];
   },
 
-  "عدم?": // null?
+  "عدم؟": // null?
   function(lst) {
     return lst instanceof Array && lst.length == 0;
   },
