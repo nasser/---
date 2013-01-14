@@ -1,15 +1,15 @@
 The قلب Programming Language
 ===========================
-قلب is a simple, [Scheme-like](http://en.wikipedia.org/wiki/Scheme_language) programming language that you code entirely in [Arabic](http://en.wikipedia.org/wiki/Modern_Standard_Arabic). It is an exploration of the impact of human culture on computer science, the role of tradition in software engineering, and the connection between natural and computer languages.
+‫قلب‬ is a simple, [Scheme-like](http://en.wikipedia.org/wiki/Scheme_language) programming language that you code entirely in [Arabic](http://en.wikipedia.org/wiki/Modern_Standard_Arabic). It is an exploration of the impact of human culture on computer science, the role of tradition in software engineering, and the connection between natural and computer languages.
 
 Syntax
 ------
-قلب has a minimal Scheme-like parenthesized syntax. Note that GitHub's layout engine will mangle all code samples in this Readme.
+‫قلب‬ has a minimal Scheme-like parenthesized syntax.
 
 Hello world looks like this
 
 ```scheme
-(قول "مرحبا يا عالم!")
+‫(قول "مرحبا يا عالم!")
 ```
 
 
