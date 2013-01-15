@@ -29,6 +29,11 @@ Qlb.globalEnvironment.merge({
     }
   },
 
+  "كرر":
+  function(n, fn) {
+    for (var i = 0; i < n; i++) { fn(n); }
+  },
+
   "عدم": // null
   function() {
     return [];
