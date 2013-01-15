@@ -77,6 +77,15 @@ Qlb.globalEnvironment.merge({
     return lst.map(fn);
   },
 
+  "طبق-مع-مؤشر":    // map-with-index
+  function(fn, lst) {
+    var ary = [];
+    for (var i = 0; i < lst.length; i++) {
+      ary[i] = fn(lst[i], i)
+    }
+    return ary;
+  },
+
   // input/output
 
   "قول":    // say
