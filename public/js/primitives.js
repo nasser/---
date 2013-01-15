@@ -34,6 +34,11 @@ Qlb.globalEnvironment.merge({
     for (var i = 0; i < n; i++) { fn(n); }
   },
 
+  "عكس":
+  function(l) {
+    return l.reverse();
+  },
+
   "عدم": // null
   function() {
     return [];
