@@ -79,12 +79,40 @@
   <body>
     <div id="console"></div>
     <script>
+      function arabize (str) {
+        if(typeof str == 'number') {
+          return str.toString().
+            replace(/1/g, "١").
+            replace(/2/g, "٢").
+            replace(/3/g, "٣").
+            replace(/4/g, "٤").
+            replace(/5/g, "٥").
+            replace(/6/g, "٦").
+            replace(/7/g, "٧").
+            replace(/8/g, "٨").
+            replace(/9/g, "٩").
+            replace(/0/g, "٠").
+            replace(/\./g, "،");
+        } else if(str === true) {
+          return "صح";
+
+        } else if(str === false) {
+          return "خطأ";
+
+        } else if(str instanceof Array) {
+          return str.map(function(e) { return Repl.arabize(e) }).toString().replace(/,/g, " ");
+
+        } else {
+          return str;
+        }
+      }
+
       Qlb.init(function () {
         function startPrompt () {
           jqconsole.Prompt(true, function (str) {
             var ret = Qlb.execute(str);
-            if (ret) {
-              jqconsole.Write('==> ' + ret + '\n', 'jqconsole-output');
+            if (ret !== undefined) {
+              jqconsole.Write('==> ' + arabize(ret) + '\n', 'jqconsole-output');
             }
             startPrompt();
           }, function (str) {
@@ -125,7 +153,7 @@
             jqconsole.Write('\n' + str + '\n\n', 'jqconsole-warn', false);
           },
           log: function (str) {
-            jqconsole.Write(str + '\n', 'jqconsole-output', false);
+            jqconsole.Write(arabize(str) + '\n', 'jqconsole-output', false);
           }
         };
         Qlb.execute('(ضمن "mtfaail/mtfaail")');
