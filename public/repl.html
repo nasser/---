@@ -81,7 +81,10 @@
       Qlb.init(function () {
         function startPrompt () {
           jqconsole.Prompt(true, function (str) {
-            Qlb.execute(str);
+            var ret = Qlb.execute(str);
+            if (ret) {
+              jqconsole.Write('==> ' + ret + '\n', 'jqconsole-output');
+            }
             startPrompt();
           }, function (str) {
             if (/\n\s*$/.test(str)) {
