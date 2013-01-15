@@ -1,3 +1,23 @@
+// TODO fold these into jx.js?
+function loadJS(url) {
+  var scriptElement = document.createElement('script')
+  scriptElement.setAttribute("type","text/javascript")
+  scriptElement.setAttribute("src", url)
+  document.getElementsByTagName("head")[0].appendChild(scriptElement)
+
+  return scriptElement;
+}
+
+function loadCSS(url) {
+  var linkElement = document.createElement("link")
+  linkElement.setAttribute("rel", "stylesheet")
+  linkElement.setAttribute("type", "text/css")
+  linkElement.setAttribute("href", url)
+  document.getElementsByTagName("head")[0].appendChild(linkElement)
+
+  return linkElement;
+}
+
 var Qlb = {};
 
 Qlb.Environment = function(table, outer) {
