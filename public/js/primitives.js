@@ -91,6 +91,12 @@ Qlb.globalEnvironment.merge({
     return window.setTimeout(fn, millis)
   },
 
+  "عنصر":
+  function(n, lst) {
+    console.log(lst.length, n, lst)
+    return n < 1 || n > lst.length ? 0 : lst[n-1];
+  },
+
   // input/output
 
   "قول":    // say
