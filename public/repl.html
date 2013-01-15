@@ -11,213 +11,70 @@
         height: 100%;
         width: 100%;
         margin: 0;
+        direction: rtl;
     }
 
-    .CodeMirror {
-      height: 36px;
-      font-size: 1.5em;
-      font-family: "Courier New", monospace;
+    a {
+      color: #2aa198;
     }
 
-    a:visited {
-      color: blue;
-    }
-
-    div.repl-output {
+    /* The console container element */
+    #console {
+      position: absolute;
+      width: 100%;
+      height: 100%;
       direction: rtl;
-      font-family: "Courier New";
-      font-size: 1.5em;
-      color: gray;
-      padding-right: 4px;
-      height: 36px;
+      background-color:  #002b36;
     }
-
-    div.repl-output.warning {
-      color: red;
+    /* The inner console element. */
+    .jqconsole {
+        padding: 50px;
+        font-family: "Courier New", monospace;
+        font-size: 20px;
     }
-
-    div.prompt {
-      font-family: "Courier New";
-      font-size: 1.5em;
-      float: right;
-      /*width: 18px;*/
-      padding-right: 4px;
-      height: 36px;
-      color: purple;
+    /* The cursor. */
+    .jqconsole-cursor {
+        background-color: gray;
     }
-
+    /* The cursor color when the console looses focus. */
+    .jqconsole-blurred .jqconsole-cursor {
+        background-color: #666;
+    }
+    /* The current prompt text color */
+    .jqconsole-prompt {
+        color: #fdf6e3;
+    }
+    /* The command history */
+    .jqconsole-old-prompt {
+        color:  #586e75;
+        font-weight: normal;
+    }
+    /* The text color when in input mode. */
+    .jqconsole-input {
+        color: #dd0;
+    }
+    /* Previously entered input. */
+    .jqconsole-old-input {
+        color: #bb0;
+        font-weight: normal;
+    }
+    /* The text color of the output. */
+    .jqconsole-output {
+        color: gray;
+    }
+    .jqconsole-warn {
+        color: #cb4b16;
+    }
+    .parans {
+      color: #6c71c4;
+    }
     </style>
-    <script src="js/codemirror.js"></script>
-    <script src="js/qlb-mode.js"></script>
-
-    <script src="js/jx.js"></script>
-    <script src="js/peg.js"></script>
-    <script src="js/qlb.js"></script>
-    <script src="js/primitives.js"></script>
-    <script type="text/javascript">
-    window.onload = function() {
-      Qlb.init(function() {
-        var Repl = {
-          history: [],
-          historyCursor: 0,
-          currentLine: null,
-
-          previousLine: function() {
-            if(historyCursor < Repl.history.length-1) historyCursor++;
-            return Repl.history[historyCursor];
-          },
-
-          nextLine: function() {
-            if(historyCursor > -1) historyCursor--;
-            return historyCursor > -1 ? Repl.history[historyCursor] : "";
-          },
-
-          incrementCursor: function() {
-            if(historyCursor < Repl.history.length-1) historyCursor++;
-            return historyCursor;
-          },
-
-          decrementCursor: function() {
-            if(historyCursor > 0) historyCursor--;
-            return historyCursor;
-          },
-
-          resetCursor: function() {
-            historyCursor = -1;
-          },
-
-          addLine: function(str, hitEnter) {
-            if(hitEnter===undefined) hitEnter = true;
-            this.currentLine.setValue(str);
-            if(hitEnter)
-              this.currentLine.getOption("onKeyEvent")(this.currentLine, {type:'keydown', keyCode:13, stop: function(){} }) // a hack!
-          },
-
-          execute: function(str) {
-            var ret = Qlb.execute(str);
-            Qlb.console.log(ret);
-          },
-
-          arabize: function(str) {
-            if(typeof str == 'number') {
-              return str.toString().
-                replace(/1/g, "١").
-                replace(/2/g, "٢").
-                replace(/3/g, "٣").
-                replace(/4/g, "٤").
-                replace(/5/g, "٥").
-                replace(/6/g, "٦").
-                replace(/7/g, "٧").
-                replace(/8/g, "٨").
-                replace(/9/g, "٩").
-                replace(/0/g, "٠").
-                replace(/\./g, "،")
-
-            } else if(str === true) {
-              return "صح"
-
-            } else if(str === false) {
-              return "خطأ"
-
-            } else if(str instanceof Array) {
-              return str.map(function(e) { return Repl.arabize(e) }).toString().replace(/,/g, " ");
-
-            } else {
-              return str
-            }
-
-          },
-
-          console: {
-            log: function(str) {
-              var div = document.createElement('div');
-              div.className = "repl-output";
-              div.innerHTML = Repl.arabize(str);
-              document.body.appendChild(div);
-
-              // implement clickable code links
-              Array.prototype.slice.call(document.querySelectorAll("a.execute")).forEach(function(e) {
-                e.onclick = function(evt) {
-                  Repl.addLine('(' + decodeURI(this.href).match(/#(.*)/)[1] + ')')
-                }
-              })
-
-              Array.prototype.slice.call(document.querySelectorAll("a.load")).forEach(function(e) {
-                e.onclick = function(evt) {
-                  url = this.href.match(/#(.*)/)[1]
-                  jx.load("/lib/" + url + ".qlb", function(code) {
-                   Repl.addLine(code, false);
-                  }, null, false);
-                }
-              })
-
-              return div;
-            },
-
-            warn: function(str) {
-              Qlb.console.log(str).className += " warning"
-            }
-          }
-        }
-
-        Qlb.console = Repl.console
-
-        window.onkeyup = function() {
-          Repl.currentLine.focus();
-        }
-
-        function newReplLine () {
-          var codemirrorOptions = {
-            theme:"byblos",
-            lineNumbers: false,
-            lineWrapping: true,
-            direction: "rtl",
-            autofocus: true,
-            onKeyEvent: function(cm, evt) {
-              if(evt.type == 'keydown') {
-                // enter
-                if(evt.keyCode == 13) {
-                  Repl.history.unshift(cm.getValue());
-                  Repl.resetCursor();
-                  Qlb.execute(cm.getValue());
-                  cm.options.readOnly = "nocursor";
-                  newReplLine();
-                  evt.stop();
-                  return true;
-
-                // up
-                } else if(evt.keyCode == 38) {
-                  cm.setValue(Repl.previousLine());
-                  evt.stop();
-                  return true;
-                  
-                // down
-                } else if(evt.keyCode == 40) {
-                  cm.setValue(Repl.nextLine());
-                  evt.stop();
-                  return true;
-
-                }
-
-              }
-            }
-          }
-
-          Repl.currentLine = CodeMirror(document.body, codemirrorOptions);
-          Repl.currentLine.on('change', function(cm) {
-            cm.setSize(null, cm.lineCount() * 28);
-          })
-        }
-
-        // load repl functionality
-        Qlb.execute('(ضمن "mtfaail/mtfaail")');
-        newReplLine();
-      });
-
-    }
-    </script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jqconsole.js"></script>
   </head>
   <body>
+    <div id="console"></div>
+  <script src="js/repl.js"></script>
   <script type="text/javascript">
     var _gauges = _gauges || [];
     (function() {
