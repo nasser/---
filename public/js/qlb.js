@@ -21,9 +21,6 @@ Qlb.isSymbol = function(sym) {
   return !!Qlb.symbols[sym];
 };
 
-// Default console is window consle
-if(Qlb.console === 'undefined') Qlb.console = window.console;
-
 Qlb.eval = function(exp, env) {
   if(typeof exp == "string") {            // evaling string/symbol
     var sym = env.find(exp);
@@ -116,8 +113,11 @@ Qlb.handleUncaughtException = function(e) {
   }
 };
 
-Qlb.init = function(onloaded) {
-  onloaded();
+// Default console is window consle
+if(Qlb.console === 'undefined') Qlb.console = window.console;
+
+Qlb.init = function (options) {
+  if (options.console) {
+    Qlb.console = options.console;
+  }
 };
-
-

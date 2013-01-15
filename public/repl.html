@@ -108,70 +108,70 @@
         }
       }
 
-      Qlb.init(function () {
-        function startPrompt () {
-          jqconsole.Prompt(true, function (str) {
-            var ret = Qlb.execute(str);
-            if (ret !== undefined) {
-              jqconsole.Write('==> ' + arabize(ret) + '\n', 'jqconsole-output');
-            }
-            startPrompt();
-          }, function (str) {
-            if (/\n\s*$/.test(str)) {
-              // Empty line, don't continue.
-              return false;
-            } else {
-              try {
-                Qlb.parser.parse(str);
-                return false;
-              } catch (e) {
-                console.log(e)
-                if (/\)$/.test(str)) {
-                  // Indent once.
-                  return 1;
-                } else {
-                  // Continue line just don't indent.
-                  return 0;
-                }
-              } 
-            }
-          });
-        };
-        var jqconsole = $('#console').jqconsole('', '>>> ');
-        jqconsole.RegisterMatching('(', ')', 'parans');
-        jqconsole.RegisterShortcut('C', function() {
-          this.AbortPrompt();
+      function startPrompt () {
+        jqconsole.Prompt(true, function (str) {
+          var ret = Qlb.execute(str);
+          if (ret !== undefined) {
+            jqconsole.Write('==> ' + arabize(ret) + '\n', 'jqconsole-output');
+          }
           startPrompt();
-        }); 
-        jqconsole.RegisterShortcut('A', function() {
-          this.MoveToStart();
-        }); 
-        jqconsole.RegisterShortcut('E', function() {
-          this.MoveToEnd();
-        }); 
-        Qlb.console = {
+        }, function (str) {
+          if (/\n\s*$/.test(str)) {
+            // Empty line, don't continue.
+            return false;
+          } else {
+            try {
+              Qlb.parser.parse(str);
+              return false;
+            } catch (e) {
+              console.log(e)
+              if (/\)$/.test(str)) {
+                // Indent once.
+                return 1;
+              } else {
+                // Continue line just don't indent.
+                return 0;
+              }
+            } 
+          }
+        });
+      };
+      var jqconsole = $('#console').jqconsole('', '>>> ');
+      jqconsole.RegisterMatching('(', ')', 'parans');
+      jqconsole.RegisterShortcut('C', function() {
+        this.AbortPrompt();
+        startPrompt();
+      }); 
+      jqconsole.RegisterShortcut('A', function() {
+        this.MoveToStart();
+      }); 
+      jqconsole.RegisterShortcut('E', function() {
+        this.MoveToEnd();
+      }); 
+      Qlb.init({
+        console: {
           warn: function (str) {
             jqconsole.Write('\n' + str + '\n\n', 'jqconsole-warn', false);
           },
           log: function (str) {
             jqconsole.Write(arabize(str) + '\n', 'jqconsole-output', false);
           }
-        };
-        Qlb.execute('(ضمن "mtfaail/mtfaail")');
-        startPrompt();
-
-        $(document).on('click', 'a.execute', function () {
-          jqconsole.SetPromptText('(' + decodeURI(this.href).match(/#(.*)/)[1] + ')');
-          jqconsole._HandleEnter();
-        });
-
-        $(document).on('click', 'a.load', function () {
-          var url = this.href.match(/#(.*)/)[1];
-          jx.load("/lib/" + url + ".qlb", function(code) {
-            jqconsole.SetPromptText(code);
-          }, null, false);
-        }); 
+        }
       });
+      Qlb.execute('(ضمن "mtfaail/mtfaail")');
+      startPrompt();
+
+      $(document).on('click', 'a.execute', function () {
+        jqconsole.SetPromptText('(' + decodeURI(this.href).match(/#(.*)/)[1] + ')');
+        jqconsole._HandleEnter();
+      });
+
+      $(document).on('click', 'a.load', function () {
+        var url = this.href.match(/#(.*)/)[1];
+        jx.load("/lib/" + url + ".qlb", function(code) {
+          jqconsole.SetPromptText(code);
+        }, null, false);
+      }); 
 
     </script>
   <script type="text/javascript">
