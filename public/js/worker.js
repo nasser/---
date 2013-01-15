@@ -40,12 +40,10 @@ var actions = {
     if (typeof ret === 'function') {
       ret = undefined;
     }
-    if (ret !== undefined) {
-      postMessage({
-        type: 'result',
-        data: ret
-      });  
-    }
+    postMessage({
+      type: 'result',
+      data: ret
+    });
   }
 };
 
