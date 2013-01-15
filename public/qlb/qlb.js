@@ -113,11 +113,37 @@ Qlb.handleUncaughtException = function(e) {
   }
 };
 
+var global = this;
+
 // Default console is window consle
-if(Qlb.console === 'undefined') Qlb.console = window.console;
+Qlb.console = global.console;
+
+// Default http adapter.
+Qlb.http = {
+  // Warning this is a Sync AJAX request. It's good 
+  // because async is contageois and would make the interpreter async.
+  // However this is bad in the main thread;
+  get: function (url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, false);
+    xhr.send();
+
+    if (xhr.status === 200) {
+      return xhr.responseText;
+    } else {
+      // XXX: Better error handling.
+      Qlb.console.warn("خطأ: نص '" + url + "' غير موجود");
+    }
+  }
+  // implement other http methods?
+};
 
 Qlb.init = function (options) {
   if (options.console) {
     Qlb.console = options.console;
   }
+  if (options.ajax) {
+    Qlb.ajax = options.ajax;
+  }
 };
+

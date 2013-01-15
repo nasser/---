@@ -77,11 +77,8 @@ Qlb.globalEnvironment.merge({
 
   "ضمن":    // require
   function(url) {
-      jx.load("/lib/" + url.replace("\\", "/") + ".qlb", function(code) {
-      return Qlb.execute(code);
-    }, function(error) {
-      Qlb.console.warn("خطأ: نص '" + url + "' غير موجود");
-    }, false);
+    var code = Qlb.http.get("/lib/" + url.replace("\\", "/") + ".qlb");
+    return Qlb.execute(code);
   },
 
   // comparison
