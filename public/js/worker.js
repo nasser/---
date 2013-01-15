@@ -1,9 +1,11 @@
+// Import qlb scripts.
 importScripts(
   '../qlb/qlb.js',
   '../qlb/parser.js', 
   '../qlb/primitives.js'
 );
 
+// What actions can be called from outside the worker.
 var actions = {
   isLineEnd: function (str) {
     function callback (result) {
