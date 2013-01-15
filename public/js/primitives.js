@@ -86,6 +86,11 @@ Qlb.globalEnvironment.merge({
     return ary;
   },
 
+  "أجل":
+  function(fn, millis) {
+    return window.setTimeout(fn, millis)
+  },
+
   // input/output
 
   "قول":    // say
