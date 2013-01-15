@@ -27,9 +27,9 @@ Licensed under the MIT license
 
   KEY_BACKSPACE = 8;
 
-  KEY_LEFT = 37;
+  KEY_RIGHT = 37;
 
-  KEY_RIGHT = 39;
+  KEY_LEFT = 39;
 
   KEY_UP = 38;
 
