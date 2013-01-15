@@ -1,0 +1,22 @@
+{
+  "name": "---",
+  "version": "0.0.0",
+  "description": "The قلب Programming Language",
+  "main": "build_parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nasser/---.git"
+  },
+  "keywords": [
+    "programming",
+    "language"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "pegjs": "~0.7.0"
+  }
+}
