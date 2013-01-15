@@ -84,6 +84,11 @@ Qlb.globalEnvironment.merge({
     }, false);
   },
 
+  "ضمن-تمديد":    // require-extension
+  function(url) {
+    loadJS("/lib/tamdeed/" + url + ".js");
+  },
+
   // comparison
    
   "يساوي؟":     // equals
