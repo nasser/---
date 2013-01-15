@@ -24,6 +24,7 @@ Qlb.Environment = function(table, outer) {
   this.table = table
   this.outer = outer
   this.find = function (sym) { return this.table[sym] === undefined ? (this.outer ? this.outer.find(sym) : undefined) : this.table[sym] }
+  this.envForSym = function (sym) { return this.table[sym] === undefined ? (this.outer ? this.outer : undefined) : this }
   this.merge = function(other) { for(var name in other) { Qlb.symbols[name] = true; this.table[name] = other[name] } }
 }
 
@@ -82,6 +83,14 @@ Qlb.init = function(onloaded) {
           var sym = rest[0],
               val = rest[1]
           return (env.table[sym] = Qlb.eval(val, env))
+
+        } else if(first == "عدل") {
+          var sym = rest[0],
+              val = rest[1]
+
+          if(env.envForSym(sym))
+            return (env.envForSym(sym).table[sym] = Qlb.eval(val, env));
+          return undefined;
 
         } else if(first == "لامدا") {
           var params = rest[0],
