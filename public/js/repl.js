@@ -64,7 +64,7 @@ var worker = new Worker('js/worker.js');
 var interpreter = {
   // Called with result from qlb execution by worker.onmessage.
   result: function (str) {
-    if (str) {
+    if (str && (str.length !== undefined ? str.length > 0 : true)) {
       jqconsole.Write('==> ' + arabize(str) + '\n', 'jqconsole-output');
     }
     // Restart the prompt.
