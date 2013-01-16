@@ -113,7 +113,7 @@ Qlb.globalEnvironment.merge({
 
   "ضمن-تمديد":    // require-extension
   function(url) {
-    loadJS("/lib/tamdeed/" + url + ".js");
+    importScripts("/lib/tamdeed/" + url + "-worker.js");
   },
 
   // comparison
