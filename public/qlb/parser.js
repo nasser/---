@@ -494,383 +494,394 @@ Qlb.parser = (function(){
       function parse_hrf() {
         var result0;
         
-        if (input.charCodeAt(pos) === 1574) {
-          result0 = "\u0626";
+        if (input.charCodeAt(pos) === 1572) {
+          result0 = "\u0624";
           pos++;
         } else {
           result0 = null;
           if (reportFailures === 0) {
-            matchFailed("\"\\u0626\"");
+            matchFailed("\"\\u0624\"");
           }
         }
         if (result0 === null) {
-          if (input.charCodeAt(pos) === 1571) {
-            result0 = "\u0623";
+          if (input.charCodeAt(pos) === 1574) {
+            result0 = "\u0626";
             pos++;
           } else {
             result0 = null;
             if (reportFailures === 0) {
-              matchFailed("\"\\u0623\"");
+              matchFailed("\"\\u0626\"");
             }
           }
           if (result0 === null) {
-            if (input.charCodeAt(pos) === 1575) {
-              result0 = "\u0627";
+            if (input.charCodeAt(pos) === 1571) {
+              result0 = "\u0623";
               pos++;
             } else {
               result0 = null;
               if (reportFailures === 0) {
-                matchFailed("\"\\u0627\"");
+                matchFailed("\"\\u0623\"");
               }
             }
             if (result0 === null) {
-              if (input.charCodeAt(pos) === 1576) {
-                result0 = "\u0628";
+              if (input.charCodeAt(pos) === 1575) {
+                result0 = "\u0627";
                 pos++;
               } else {
                 result0 = null;
                 if (reportFailures === 0) {
-                  matchFailed("\"\\u0628\"");
+                  matchFailed("\"\\u0627\"");
                 }
               }
               if (result0 === null) {
-                if (input.charCodeAt(pos) === 1580) {
-                  result0 = "\u062C";
+                if (input.charCodeAt(pos) === 1576) {
+                  result0 = "\u0628";
                   pos++;
                 } else {
                   result0 = null;
                   if (reportFailures === 0) {
-                    matchFailed("\"\\u062C\"");
+                    matchFailed("\"\\u0628\"");
                   }
                 }
                 if (result0 === null) {
-                  if (input.charCodeAt(pos) === 1583) {
-                    result0 = "\u062F";
+                  if (input.charCodeAt(pos) === 1580) {
+                    result0 = "\u062C";
                     pos++;
                   } else {
                     result0 = null;
                     if (reportFailures === 0) {
-                      matchFailed("\"\\u062F\"");
+                      matchFailed("\"\\u062C\"");
                     }
                   }
                   if (result0 === null) {
-                    if (input.charCodeAt(pos) === 1607) {
-                      result0 = "\u0647";
+                    if (input.charCodeAt(pos) === 1583) {
+                      result0 = "\u062F";
                       pos++;
                     } else {
                       result0 = null;
                       if (reportFailures === 0) {
-                        matchFailed("\"\\u0647\"");
+                        matchFailed("\"\\u062F\"");
                       }
                     }
                     if (result0 === null) {
-                      if (input.charCodeAt(pos) === 1608) {
-                        result0 = "\u0648";
+                      if (input.charCodeAt(pos) === 1607) {
+                        result0 = "\u0647";
                         pos++;
                       } else {
                         result0 = null;
                         if (reportFailures === 0) {
-                          matchFailed("\"\\u0648\"");
+                          matchFailed("\"\\u0647\"");
                         }
                       }
                       if (result0 === null) {
-                        if (input.charCodeAt(pos) === 1586) {
-                          result0 = "\u0632";
+                        if (input.charCodeAt(pos) === 1608) {
+                          result0 = "\u0648";
                           pos++;
                         } else {
                           result0 = null;
                           if (reportFailures === 0) {
-                            matchFailed("\"\\u0632\"");
+                            matchFailed("\"\\u0648\"");
                           }
                         }
                         if (result0 === null) {
-                          if (input.charCodeAt(pos) === 1581) {
-                            result0 = "\u062D";
+                          if (input.charCodeAt(pos) === 1586) {
+                            result0 = "\u0632";
                             pos++;
                           } else {
                             result0 = null;
                             if (reportFailures === 0) {
-                              matchFailed("\"\\u062D\"");
+                              matchFailed("\"\\u0632\"");
                             }
                           }
                           if (result0 === null) {
-                            if (input.charCodeAt(pos) === 1578) {
-                              result0 = "\u062A";
+                            if (input.charCodeAt(pos) === 1581) {
+                              result0 = "\u062D";
                               pos++;
                             } else {
                               result0 = null;
                               if (reportFailures === 0) {
-                                matchFailed("\"\\u062A\"");
+                                matchFailed("\"\\u062D\"");
                               }
                             }
                             if (result0 === null) {
-                              if (input.charCodeAt(pos) === 1610) {
-                                result0 = "\u064A";
+                              if (input.charCodeAt(pos) === 1578) {
+                                result0 = "\u062A";
                                 pos++;
                               } else {
                                 result0 = null;
                                 if (reportFailures === 0) {
-                                  matchFailed("\"\\u064A\"");
+                                  matchFailed("\"\\u062A\"");
                                 }
                               }
                               if (result0 === null) {
-                                if (input.charCodeAt(pos) === 1603) {
-                                  result0 = "\u0643";
+                                if (input.charCodeAt(pos) === 1610) {
+                                  result0 = "\u064A";
                                   pos++;
                                 } else {
                                   result0 = null;
                                   if (reportFailures === 0) {
-                                    matchFailed("\"\\u0643\"");
+                                    matchFailed("\"\\u064A\"");
                                   }
                                 }
                                 if (result0 === null) {
-                                  if (input.charCodeAt(pos) === 1604) {
-                                    result0 = "\u0644";
+                                  if (input.charCodeAt(pos) === 1603) {
+                                    result0 = "\u0643";
                                     pos++;
                                   } else {
                                     result0 = null;
                                     if (reportFailures === 0) {
-                                      matchFailed("\"\\u0644\"");
+                                      matchFailed("\"\\u0643\"");
                                     }
                                   }
                                   if (result0 === null) {
-                                    if (input.charCodeAt(pos) === 1605) {
-                                      result0 = "\u0645";
+                                    if (input.charCodeAt(pos) === 1604) {
+                                      result0 = "\u0644";
                                       pos++;
                                     } else {
                                       result0 = null;
                                       if (reportFailures === 0) {
-                                        matchFailed("\"\\u0645\"");
+                                        matchFailed("\"\\u0644\"");
                                       }
                                     }
                                     if (result0 === null) {
-                                      if (input.charCodeAt(pos) === 1606) {
-                                        result0 = "\u0646";
+                                      if (input.charCodeAt(pos) === 1605) {
+                                        result0 = "\u0645";
                                         pos++;
                                       } else {
                                         result0 = null;
                                         if (reportFailures === 0) {
-                                          matchFailed("\"\\u0646\"");
+                                          matchFailed("\"\\u0645\"");
                                         }
                                       }
                                       if (result0 === null) {
-                                        if (input.charCodeAt(pos) === 1602) {
-                                          result0 = "\u0642";
+                                        if (input.charCodeAt(pos) === 1606) {
+                                          result0 = "\u0646";
                                           pos++;
                                         } else {
                                           result0 = null;
                                           if (reportFailures === 0) {
-                                            matchFailed("\"\\u0642\"");
+                                            matchFailed("\"\\u0646\"");
                                           }
                                         }
                                         if (result0 === null) {
-                                          if (input.charCodeAt(pos) === 1588) {
-                                            result0 = "\u0634";
+                                          if (input.charCodeAt(pos) === 1602) {
+                                            result0 = "\u0642";
                                             pos++;
                                           } else {
                                             result0 = null;
                                             if (reportFailures === 0) {
-                                              matchFailed("\"\\u0634\"");
+                                              matchFailed("\"\\u0642\"");
                                             }
                                           }
                                           if (result0 === null) {
-                                            if (input.charCodeAt(pos) === 1593) {
-                                              result0 = "\u0639";
+                                            if (input.charCodeAt(pos) === 1588) {
+                                              result0 = "\u0634";
                                               pos++;
                                             } else {
                                               result0 = null;
                                               if (reportFailures === 0) {
-                                                matchFailed("\"\\u0639\"");
+                                                matchFailed("\"\\u0634\"");
                                               }
                                             }
                                             if (result0 === null) {
-                                              if (input.charCodeAt(pos) === 1585) {
-                                                result0 = "\u0631";
+                                              if (input.charCodeAt(pos) === 1593) {
+                                                result0 = "\u0639";
                                                 pos++;
                                               } else {
                                                 result0 = null;
                                                 if (reportFailures === 0) {
-                                                  matchFailed("\"\\u0631\"");
+                                                  matchFailed("\"\\u0639\"");
                                                 }
                                               }
                                               if (result0 === null) {
-                                                if (input.charCodeAt(pos) === 1578) {
-                                                  result0 = "\u062A";
+                                                if (input.charCodeAt(pos) === 1585) {
+                                                  result0 = "\u0631";
                                                   pos++;
                                                 } else {
                                                   result0 = null;
                                                   if (reportFailures === 0) {
-                                                    matchFailed("\"\\u062A\"");
+                                                    matchFailed("\"\\u0631\"");
                                                   }
                                                 }
                                                 if (result0 === null) {
-                                                  if (input.charCodeAt(pos) === 1591) {
-                                                    result0 = "\u0637";
+                                                  if (input.charCodeAt(pos) === 1578) {
+                                                    result0 = "\u062A";
                                                     pos++;
                                                   } else {
                                                     result0 = null;
                                                     if (reportFailures === 0) {
-                                                      matchFailed("\"\\u0637\"");
+                                                      matchFailed("\"\\u062A\"");
                                                     }
                                                   }
                                                   if (result0 === null) {
-                                                    if (input.charCodeAt(pos) === 1577) {
-                                                      result0 = "\u0629";
+                                                    if (input.charCodeAt(pos) === 1591) {
+                                                      result0 = "\u0637";
                                                       pos++;
                                                     } else {
                                                       result0 = null;
                                                       if (reportFailures === 0) {
-                                                        matchFailed("\"\\u0629\"");
+                                                        matchFailed("\"\\u0637\"");
                                                       }
                                                     }
                                                     if (result0 === null) {
-                                                      if (input.charCodeAt(pos) === 1587) {
-                                                        result0 = "\u0633";
+                                                      if (input.charCodeAt(pos) === 1577) {
+                                                        result0 = "\u0629";
                                                         pos++;
                                                       } else {
                                                         result0 = null;
                                                         if (reportFailures === 0) {
-                                                          matchFailed("\"\\u0633\"");
+                                                          matchFailed("\"\\u0629\"");
                                                         }
                                                       }
                                                       if (result0 === null) {
-                                                        if (input.charCodeAt(pos) === 1583) {
-                                                          result0 = "\u062F";
+                                                        if (input.charCodeAt(pos) === 1587) {
+                                                          result0 = "\u0633";
                                                           pos++;
                                                         } else {
                                                           result0 = null;
                                                           if (reportFailures === 0) {
-                                                            matchFailed("\"\\u062F\"");
+                                                            matchFailed("\"\\u0633\"");
                                                           }
                                                         }
                                                         if (result0 === null) {
-                                                          if (input.charCodeAt(pos) === 1601) {
-                                                            result0 = "\u0641";
+                                                          if (input.charCodeAt(pos) === 1583) {
+                                                            result0 = "\u062F";
                                                             pos++;
                                                           } else {
                                                             result0 = null;
                                                             if (reportFailures === 0) {
-                                                              matchFailed("\"\\u0641\"");
+                                                              matchFailed("\"\\u062F\"");
                                                             }
                                                           }
                                                           if (result0 === null) {
-                                                            if (input.charCodeAt(pos) === 1594) {
-                                                              result0 = "\u063A";
+                                                            if (input.charCodeAt(pos) === 1601) {
+                                                              result0 = "\u0641";
                                                               pos++;
                                                             } else {
                                                               result0 = null;
                                                               if (reportFailures === 0) {
-                                                                matchFailed("\"\\u063A\"");
+                                                                matchFailed("\"\\u0641\"");
                                                               }
                                                             }
                                                             if (result0 === null) {
-                                                              if (input.charCodeAt(pos) === 1582) {
-                                                                result0 = "\u062E";
+                                                              if (input.charCodeAt(pos) === 1594) {
+                                                                result0 = "\u063A";
                                                                 pos++;
                                                               } else {
                                                                 result0 = null;
                                                                 if (reportFailures === 0) {
-                                                                  matchFailed("\"\\u062E\"");
+                                                                  matchFailed("\"\\u063A\"");
                                                                 }
                                                               }
                                                               if (result0 === null) {
-                                                                if (input.charCodeAt(pos) === 1589) {
-                                                                  result0 = "\u0635";
+                                                                if (input.charCodeAt(pos) === 1582) {
+                                                                  result0 = "\u062E";
                                                                   pos++;
                                                                 } else {
                                                                   result0 = null;
                                                                   if (reportFailures === 0) {
-                                                                    matchFailed("\"\\u0635\"");
+                                                                    matchFailed("\"\\u062E\"");
                                                                   }
                                                                 }
                                                                 if (result0 === null) {
-                                                                  if (input.charCodeAt(pos) === 1584) {
-                                                                    result0 = "\u0630";
+                                                                  if (input.charCodeAt(pos) === 1589) {
+                                                                    result0 = "\u0635";
                                                                     pos++;
                                                                   } else {
                                                                     result0 = null;
                                                                     if (reportFailures === 0) {
-                                                                      matchFailed("\"\\u0630\"");
+                                                                      matchFailed("\"\\u0635\"");
                                                                     }
                                                                   }
                                                                   if (result0 === null) {
-                                                                    if (input.charCodeAt(pos) === 1606) {
-                                                                      result0 = "\u0646";
+                                                                    if (input.charCodeAt(pos) === 1584) {
+                                                                      result0 = "\u0630";
                                                                       pos++;
                                                                     } else {
                                                                       result0 = null;
                                                                       if (reportFailures === 0) {
-                                                                        matchFailed("\"\\u0646\"");
+                                                                        matchFailed("\"\\u0630\"");
                                                                       }
                                                                     }
                                                                     if (result0 === null) {
-                                                                      if (input.charCodeAt(pos) === 1605) {
-                                                                        result0 = "\u0645";
+                                                                      if (input.charCodeAt(pos) === 1606) {
+                                                                        result0 = "\u0646";
                                                                         pos++;
                                                                       } else {
                                                                         result0 = null;
                                                                         if (reportFailures === 0) {
-                                                                          matchFailed("\"\\u0645\"");
+                                                                          matchFailed("\"\\u0646\"");
                                                                         }
                                                                       }
                                                                       if (result0 === null) {
-                                                                        if (input.charCodeAt(pos) === 1592) {
-                                                                          result0 = "\u0638";
+                                                                        if (input.charCodeAt(pos) === 1605) {
+                                                                          result0 = "\u0645";
                                                                           pos++;
                                                                         } else {
                                                                           result0 = null;
                                                                           if (reportFailures === 0) {
-                                                                            matchFailed("\"\\u0638\"");
+                                                                            matchFailed("\"\\u0645\"");
                                                                           }
                                                                         }
                                                                         if (result0 === null) {
-                                                                          if (input.charCodeAt(pos) === 1609) {
-                                                                            result0 = "\u0649";
+                                                                          if (input.charCodeAt(pos) === 1592) {
+                                                                            result0 = "\u0638";
                                                                             pos++;
                                                                           } else {
                                                                             result0 = null;
                                                                             if (reportFailures === 0) {
-                                                                              matchFailed("\"\\u0649\"");
+                                                                              matchFailed("\"\\u0638\"");
                                                                             }
                                                                           }
                                                                           if (result0 === null) {
-                                                                            if (input.charCodeAt(pos) === 1570) {
-                                                                              result0 = "\u0622";
+                                                                            if (input.charCodeAt(pos) === 1609) {
+                                                                              result0 = "\u0649";
                                                                               pos++;
                                                                             } else {
                                                                               result0 = null;
                                                                               if (reportFailures === 0) {
-                                                                                matchFailed("\"\\u0622\"");
+                                                                                matchFailed("\"\\u0649\"");
                                                                               }
                                                                             }
                                                                             if (result0 === null) {
-                                                                              if (input.charCodeAt(pos) === 1573) {
-                                                                                result0 = "\u0625";
+                                                                              if (input.charCodeAt(pos) === 1570) {
+                                                                                result0 = "\u0622";
                                                                                 pos++;
                                                                               } else {
                                                                                 result0 = null;
                                                                                 if (reportFailures === 0) {
-                                                                                  matchFailed("\"\\u0625\"");
+                                                                                  matchFailed("\"\\u0622\"");
                                                                                 }
                                                                               }
                                                                               if (result0 === null) {
-                                                                                if (input.charCodeAt(pos) === 1590) {
-                                                                                  result0 = "\u0636";
+                                                                                if (input.charCodeAt(pos) === 1573) {
+                                                                                  result0 = "\u0625";
                                                                                   pos++;
                                                                                 } else {
                                                                                   result0 = null;
                                                                                   if (reportFailures === 0) {
-                                                                                    matchFailed("\"\\u0636\"");
+                                                                                    matchFailed("\"\\u0625\"");
                                                                                   }
                                                                                 }
                                                                                 if (result0 === null) {
-                                                                                  if (input.charCodeAt(pos) === 1579) {
-                                                                                    result0 = "\u062B";
+                                                                                  if (input.charCodeAt(pos) === 1590) {
+                                                                                    result0 = "\u0636";
                                                                                     pos++;
                                                                                   } else {
                                                                                     result0 = null;
                                                                                     if (reportFailures === 0) {
-                                                                                      matchFailed("\"\\u062B\"");
+                                                                                      matchFailed("\"\\u0636\"");
+                                                                                    }
+                                                                                  }
+                                                                                  if (result0 === null) {
+                                                                                    if (input.charCodeAt(pos) === 1579) {
+                                                                                      result0 = "\u062B";
+                                                                                      pos++;
+                                                                                    } else {
+                                                                                      result0 = null;
+                                                                                      if (reportFailures === 0) {
+                                                                                        matchFailed("\"\\u062B\"");
+                                                                                      }
                                                                                     }
                                                                                   }
                                                                                 }
