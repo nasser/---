@@ -6,7 +6,7 @@
 
 (حدد أمثلة (لامدا () (
   (قول "سـهـل: <a class='load' href='#amthila/mrhba'>مرحبا يا عالم</a>")
-  (قول "متوسط: <a class='load' href='#amthila/fybunatshi'> عدد فيبوناتشي</a>")
+  (قول "متوسط: <a class='load' href='#amthila/fybunatshi'>عدد فيبوناتشي</a>")
   (قول "متقدم: <a class='load' href='#amthila/konway'>لعبة الحياة لكونواي</a>")  
   (عدم)
 )))
