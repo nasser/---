@@ -53,6 +53,10 @@ interpreter["رسم:لون"] = function(args) {
   Rasm.color(args.r, args.g, args.b);
 }
 
+interpreter["رسم:لون-الخط"] = function(args) {
+  Rasm.stroke(args.r, args.g, args.b);
+}
+
 interpreter["رسم:خلفية"] = function(args) {
   Rasm.background(args.r, args.g, args.b);
 }

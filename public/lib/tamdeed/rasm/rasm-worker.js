@@ -11,6 +11,7 @@ var stubs = [
   { name: "انزلاق", params: ["x", "y", "z"] },
   { name: "دوران", params: ["x", "y", "z"] },
   { name: "لون", params: ["r", "g", "b"] },
+  { name: "لون-الخط", params: ["r", "g", "b"] },
   { name: "خلفية", params: ["r", "g", "b"] }
 ]
 
