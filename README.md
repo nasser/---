@@ -21,7 +21,7 @@ Acknowledgments
 ---------------
 The implementation is largely based on [Lispy, Peter Norvig's 90 line Lisp interpreter](http://norvig.com/lispy.html)
 
-The REPL and Editor are built on [jq-console](http://replit.github.com/jq-console/), by [Max Shawabkeh](http://max99x.com/) [Amjad Masad](http://twitter.com/amjad_masad)
+The REPL and Editor are built on [jq-console](http://replit.github.com/jq-console/), by [Max Shawabkeh](http://max99x.com/) and [Amjad Masad](http://twitter.com/amjad_masad)
 
 The parser is built using [Peg.js](http://pegjs.majda.cz/), &copy; 2010-2012 David Majda
 
