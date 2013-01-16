@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>قلب REPL</title>
-    <link rel="stylesheet" href="css/codemirror.css">
+    <script src="js/rainbow.js"></script>
+    <script src="js/qlb-highlight.js"></script>
     <link rel="stylesheet" href="css/byblos.css">
     <style type="text/css">
     html,
@@ -14,8 +15,9 @@
         direction: rtl;
     }
 
-    a {
-      color: #2aa198;
+    a,
+    a:visited {
+      color: blue;
     }
 
     /* The console container element */
@@ -24,7 +26,7 @@
       width: 100%;
       height: 100%;
       direction: rtl;
-      background-color:  #002b36;
+      background-color:  white;
     }
     /* The inner console element. */
     .jqconsole {
@@ -41,7 +43,7 @@
     }
     /* The current prompt text color */
     .jqconsole-prompt {
-        color: #fdf6e3;
+        color: #333;
     }
     /* The command history */
     .jqconsole-old-prompt {
@@ -65,7 +67,17 @@
         color: #cb4b16;
     }
     .parans {
-      color: #6c71c4;
+      text-decoration: underline;
+    }
+
+    .function {
+      color: #cb4b16;
+    }
+    .special-form {
+      color: #2aa198;
+    }
+    .number {
+      color: #859900;;
     }
     </style>
     <script src="js/jquery.js"></script>

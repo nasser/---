@@ -123,4 +123,17 @@ $(document).on('click', 'a.load', function () {
 
 // Go!
 interpreter.execute('(ضمن "mtfaail/mtfaail")');
+interpreter.execute('(ضمن-تمديد "rasm/rasm")')
 startPrompt();
+
+function hl() {
+  $(".jqconsole-old-prompt")
+    // .add($(".jqconsole-prompt > span").eq(0))
+    // .add($(".jqconsole-prompt .jqconsole-cursor").prev())
+    .each(function(i, e) {
+      Rainbow.color(this.innerText, "qlb", function(c) { $(e).html(c) } )
+    });
+}
+
+setInterval(hl, 1000);
+
