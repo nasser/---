@@ -21,9 +21,7 @@ Acknowledgments
 ---------------
 The implementation is largely based on [Lispy, Peter Norvig's 90 line Lisp interpreter](http://norvig.com/lispy.html)
 
-The REPL and Editor are built on [CodeMirror](http://codemirror.net/), &copy; 2012 by Marijn Haverbeke <marijnh@gmail.com>
-
-Ajax queries are handled using a modified version of [jx.js](http://www.openjs.com/scripts/jx/)
+The REPL and Editor are built on [jq-console](http://replit.github.com/jq-console/), by [Max Shawabkeh](http://max99x.com/) [Amjad Masad](http://twitter.com/amjad_masad)
 
 The parser is built using [Peg.js](http://pegjs.majda.cz/), &copy; 2010-2012 David Majda
 
@@ -32,6 +30,8 @@ The implementation of the Fibonacci algorithm is based on [this one](http://rose
 The implementation of Conway's Game of Life is based on [this one](http://rosettacode.org/wiki/Conway%27s_Game_of_Life#Scheme) from [Rosetta Code](http://rosettacode.org/).
 
 Arabic spelling and grammar help from the wonderful [Haitham Ennasr](https://twitter.com/e_n_n_a_s_r)
+
+Web worker infrastructure and jq-console integration by [Amjad Masad](http://twitter.com/amjad_masad)
 
 Legal
 -----
