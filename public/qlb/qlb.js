@@ -39,7 +39,7 @@ Qlb.eval = function(exp, env) {
       return rest
 
     } else if(first == "إفعل") {
-      rest = rest.map(function(e) { return Qlb.eval(e, env) });
+      rest = run(rest, env);
       return rest[rest.length - 1];
 
     } else if(first == "إذا") {
@@ -75,7 +75,8 @@ Qlb.eval = function(exp, env) {
       }
 
     } else {
-      var exps = exp.map(function(p) { return Qlb.eval(p, env) })
+      var exps = run(exp, env);
+
       if(typeof exps[0] == "function")
         // first element evaluates to a function
         return exps.shift().apply(this, exps)
@@ -86,23 +87,33 @@ Qlb.eval = function(exp, env) {
       } else
         // return last element
         return exps[exps.length - 1];
+      
 
     }
   }
 };
 
+
+function run(ast, env) {
+  try {
+    var val;
+    var ret = [];
+    for (var i = 0; i < ast.length; i++) {
+      val = Qlb.eval(ast[i], env);
+      ret.push(val);
+    };
+    return ret;
+  } catch(e) {
+    Qlb.handleUncaughtException(e);
+  }
+}
+
 Qlb.execute = function(code) {
   try {
     var ast = Qlb.parser.parse(code);
-    var val;
-    for (var i = 0; i < ast.length; i++) {
-      val = Qlb.eval(ast[i], Qlb.globalEnvironment);
-    };
-    return val;
-
-  } catch(e) {
+    return run(ast, Qlb.globalEnvironment).pop();
+  } catch (e) {
     Qlb.handleUncaughtException(e);
-
   }
 };
 
