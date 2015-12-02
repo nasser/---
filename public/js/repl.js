@@ -5,7 +5,7 @@ for(var i=0; i<snippetList.length; i++) {
 }
 
 function arabize (str) {
-  if(typeof str == 'number') {
+  if(typeof str == 'number' || typeof str == 'string') {
     return str.toString().
       replace(/1/g, "١").
       replace(/2/g, "٢").
@@ -17,7 +17,11 @@ function arabize (str) {
       replace(/8/g, "٨").
       replace(/9/g, "٩").
       replace(/0/g, "٠").
-      replace(/\./g, "،");
+      replace(/\./g, "،").
+      replace(/function[^}]+([;\)\(\}]|\s)+/,"<دالة>");
+  } else if(typeof str == 'function') {
+    return "دالة:" + str.name;
+
   } else if(str === true) {
     return "صح";
 
